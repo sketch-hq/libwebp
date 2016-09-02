@@ -1,0 +1,7 @@
+module WebP {
+    umbrella header "WebP.h"
+    link "libwebp"
+    
+    export *
+    module * { export * }
+}

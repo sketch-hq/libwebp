@@ -1,0 +1,6 @@
+#include "../BCFoundation/Configs/BCStaticLibrary.xcconfig"
+
+// Common settings for the WebP project go here.
+
+PRODUCT_NAME=$(TARGET_NAME)
+CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO // This causes about 360 warnings!
