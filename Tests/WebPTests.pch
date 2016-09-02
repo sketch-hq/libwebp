@@ -2,5 +2,6 @@
 #ifdef __OBJC__
 
 @import ECUnitTests;
+@import WebP;
 
 #endif
