@@ -1,6 +1,8 @@
 
 #ifdef __OBJC__
 
+@import Cocoa;
+
 #include "encode.h"
 #include "decode.h"
 #include "demux.h"
