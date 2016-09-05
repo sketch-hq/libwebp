@@ -7,6 +7,6 @@
 
 /// Returns a new NSImage if the contents of the file at \c url can be interpreted as webp
 /// or nil otherwise
-+ (NSImage*)imageWithWebPURL:(NSURL*)url;
++ (nullable NSImage*)imageWithWebPURL:(nonnull NSURL*)url;
 
 @end
