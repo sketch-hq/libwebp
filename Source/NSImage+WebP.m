@@ -10,39 +10,29 @@
 @implementation NSImage (WebP)
 
 + (NSImage*)imageWithWebPURL:(NSURL*)url {
-//  char* rgba = (char*)malloc(width*height*4);
-//  for(int i=0; i < width*height; ++i) {
-//    rgba[4*i] = myBuffer[3*i];
-//    rgba[4*i+1] = myBuffer[3*i+1];
-//    rgba[4*i+2] = myBuffer[3*i+2];
-//    rgba[4*i+3] = 0;
-//  }
-//  CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//  CGContextRef bitmapContext = CGBitmapContextCreate(
-//                                                     rgba,
-//                                                     width,
-//                                                     height,
-//                                                     8, // bitsPerComponent
-//                                                     4*width, // bytesPerRow
-//                                                     colorSpace,
-//                                                     kCGImageAlphaNoneSkipLast);
-//  
-//  CFRelease(colorSpace);
-//  
-//  CGImageRef cgImage = CGBitmapContextCreateImage(bitmapContext);
-//  CFURLRef url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFSTR("image.png"), kCFURLPOSIXPathStyle, false);
-//  
-//  CFStringRef type = kUTTypePNG; // or kUTTypeBMP if you like
-//  CGImageDestinationRef dest = CGImageDestinationCreateWithURL(url, type, 1, 0);
-//  
-//  CGImageDestinationAddImage(dest, cgImage, 0);
-//  
-//  CFRelease(cgImage);
-//  CFRelease(bitmapContext);
-//  CGImageDestinationFinalize(dest);
-//  free(rgba);
+  NSImage *result = nil;
+  NSData *data = [NSData dataWithContentsOfURL:url];
+  if (data) {
+    int width = 0;
+    int height = 0;
+    uint8_t *webp = WebPDecodeRGBA( data.bytes, data.length, &width, &height );
+    if (webp) {
+      CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+      CGContextRef bitmap = CGBitmapContextCreate( webp, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast );
+      CFRelease(colorSpace);
+      
+      CGImageRef cgImage = CGBitmapContextCreateImage( bitmap );
+      result = [[NSImage alloc] initWithCGImage:cgImage size:NSMakeSize(width, height)];
+      CFRelease( cgImage );
+      CFRelease( bitmap );
+      
+      WebPFree( webp );
+    }
+  }
   
-  return nil;
+  return result;
 }
+
+
 
 @end

@@ -40,7 +40,8 @@
 }
 
 - (void)testNilURL {
-  NSURL *url = [NSURL fileURLWithPath:@".."];
+  NSBundle *bundle = [NSBundle bundleForClass:self.class];
+  NSURL *url = [bundle URLForResource:@"Doesn't exist" withExtension:@"png" subdirectory:@"Reference"];
   ECTestAssertNil( url );
   NSImage *image = [NSImage imageWithWebPURL:url];
   ECTestAssertNil( image );
