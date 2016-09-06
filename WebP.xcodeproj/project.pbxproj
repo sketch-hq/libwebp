@@ -155,7 +155,6 @@
 		86DD0F391D75C2CD008D5BB4 /* mux.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F321D75C2CD008D5BB4 /* mux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3A1D75C2CD008D5BB4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F331D75C2CD008D5BB4 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3C1D75C340008D5BB4 /* WebP.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* WebP.pch */; };
-		86DD0F3F1D75C3A1008D5BB4 /* WebPTests.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */; };
 		86DD0F421D75CA86008D5BB4 /* WebPTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0F411D75CA86008D5BB4 /* WebPTester.m */; };
 /* End PBXBuildFile section */
 
@@ -664,7 +663,6 @@
 				86A35A141D79BE80002DCEC2 /* vp8i.h in Headers */,
 				865C9AC61D79DFF400345AF9 /* huffman.h in Headers */,
 				86DD0E2D1D75C1F2008D5BB4 /* delta_palettization.h in Headers */,
-				86DD0F3F1D75C3A1008D5BB4 /* WebPTests.pch in Headers */,
 				5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */,
 				86DD0E3F1D75C1F2008D5BB4 /* vp8li.h in Headers */,
 				865C9ABB1D79DFF400345AF9 /* bit_reader.h in Headers */,
