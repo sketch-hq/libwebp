@@ -5,8 +5,15 @@
 
 @interface NSImage (WebP)
 
-/// Returns a new NSImage if the contents of the file at \c url can be interpreted as webp
-/// or nil otherwise
+/**
+ Returns a new NSImage if the contents of \c data can be interpreted as webp or nil otherwise
+ */
++ (nullable NSImage*)imageWithWebPData:(nonnull NSData*)data;
+
+/**
+ Returns a new NSImage if the contents of the file at \c url can be interpreted as webp
+ or nil otherwise
+ */
 + (nullable NSImage*)imageWithWebPURL:(nonnull NSURL*)url;
 
 @end
