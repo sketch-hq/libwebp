@@ -24,11 +24,11 @@
       }
     }
     
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&webp pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bitmapFormat:NS32BitLittleEndianBitmapFormat bytesPerRow:4 * width bitsPerPixel:32];
+    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bitmapFormat:NS32BitLittleEndianBitmapFormat bytesPerRow:4 * width bitsPerPixel:32];
+    memcpy( rep.bitmapData, webp, width * height * 4 );
+    WebPFree( webp );
     result = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
     [result addRepresentation:rep];
-    
-    WebPFree( webp );
   }
   return result;
 }
