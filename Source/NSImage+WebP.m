@@ -7,6 +7,8 @@
 #import "NSImage+WebP.h"
 #include "decode.h"
 
+NSString * const NSImageUTTypeWebP = @"public.webp";
+
 @implementation NSImage (WebP)
 
 + (NSImage*)imageWithWebPData:(NSData*)data {

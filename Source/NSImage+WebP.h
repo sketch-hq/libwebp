@@ -3,6 +3,8 @@
 //  Copyright © 2016 Bohemian Coding. All rights reserved.
 //
 
+extern NSString * _Nonnull const NSImageUTTypeWebP;
+
 @interface NSImage (WebP)
 
 /**
