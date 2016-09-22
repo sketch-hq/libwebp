@@ -165,16 +165,6 @@
 		86DD0F3C1D75C340008D5BB4 /* WebP.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* WebP.pch */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5B42DE8A1A63D1930025C1EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B42DE751A63D1930025C1EA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5B42DE7C1A63D1930025C1EA;
-			remoteInfo = BCCrypto;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		22D0BF0E1AFA4EEE00AE043D /* WebPDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPDebug.xcconfig; sourceTree = "<group>"; };
 		22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPRelease.xcconfig; sourceTree = "<group>"; };
@@ -755,7 +745,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5B42DE8B1A63D1930025C1EA /* PBXTargetDependency */,
 			);
 			name = WebPTests;
 			productName = BCCryptoTests;
@@ -823,6 +812,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -947,14 +937,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5B42DE8B1A63D1930025C1EA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5B42DE7C1A63D1930025C1EA /* WebP */;
-			targetProxy = 5B42DE8A1A63D1930025C1EA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5B42DE8F1A63D1930025C1EA /* Debug */ = {
