@@ -3,6 +3,6 @@
 
 @import ECUnitTests;
 @import Chocolat;
-#import "WebP.h"
+@import WebP;
 
 #endif
