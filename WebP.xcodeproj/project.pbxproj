@@ -112,6 +112,14 @@
 		86A35A161D79BE80002DCEC2 /* vp8li.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A35A061D79BE80002DCEC2 /* vp8li.h */; };
 		86A35A171D79BE80002DCEC2 /* webp.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A35A071D79BE80002DCEC2 /* webp.c */; };
 		86A35A181D79BE80002DCEC2 /* webpi.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A35A081D79BE80002DCEC2 /* webpi.h */; };
+		86DA98D51D7DD1380063A34F /* NSImage+WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DA98D31D7DD1380063A34F /* NSImage+WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86DA98D61D7DD1380063A34F /* NSImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DA98D41D7DD1380063A34F /* NSImage+WebP.m */; };
+		86DA98D81D7DD3300063A34F /* NSImageWebPTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */; };
+		86DA98DA1D7DD4420063A34F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = 86DA98D91D7DD4420063A34F /* Documents */; };
+		86DA98E41D7DDC0A0063A34F /* Reference in Resources */ = {isa = PBXBuildFile; fileRef = 86DA98E31D7DDC0A0063A34F /* Reference */; };
+		86DA98E61D7DDE070063A34F /* libChocolat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DA98E51D7DDE070063A34F /* libChocolat.a */; };
+		86DA98E81D7DDE250063A34F /* libBCFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DA98E71D7DDE250063A34F /* libBCFoundation.a */; };
+		86DA98EA1D7DDE7F0063A34F /* libECLogging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DA98E91D7DDE7F0063A34F /* libECLogging.a */; };
 		86DD0E251D75C1F2008D5BB4 /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E091D75C1F2008D5BB4 /* alpha.c */; };
 		86DD0E261D75C1F2008D5BB4 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E0A1D75C1F2008D5BB4 /* analysis.c */; };
 		86DD0E271D75C1F2008D5BB4 /* backward_references.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E0B1D75C1F2008D5BB4 /* backward_references.c */; };
@@ -155,19 +163,7 @@
 		86DD0F391D75C2CD008D5BB4 /* mux.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F321D75C2CD008D5BB4 /* mux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3A1D75C2CD008D5BB4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F331D75C2CD008D5BB4 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3C1D75C340008D5BB4 /* WebP.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* WebP.pch */; };
-		86DD0F3F1D75C3A1008D5BB4 /* WebPTests.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */; };
-		86DD0F421D75CA86008D5BB4 /* WebPTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0F411D75CA86008D5BB4 /* WebPTester.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5B42DE8A1A63D1930025C1EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B42DE751A63D1930025C1EA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5B42DE7C1A63D1930025C1EA;
-			remoteInfo = BCCrypto;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		22D0BF0E1AFA4EEE00AE043D /* WebPDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPDebug.xcconfig; sourceTree = "<group>"; };
@@ -177,7 +173,7 @@
 		22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsDebug.xcconfig; sourceTree = "<group>"; };
 		22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsRelease.xcconfig; sourceTree = "<group>"; };
 		5B42DE7D1A63D1930025C1EA /* libWebP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B42DE881A63D1930025C1EA /* WebP.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebP.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42DE881A63D1930025C1EA /* WebPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE981A63D9AD0025C1EA /* WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebP.h; path = Source/WebP.h; sourceTree = "<group>"; };
 		5B42DEA21A63DBDA0025C1EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ECUnitTests.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BCCrypto-efurtmprkzemrwgfkjfqnkiilreb/Build/Products/Debug/ECUnitTests.framework"; sourceTree = "<group>"; };
@@ -284,6 +280,14 @@
 		86A35A061D79BE80002DCEC2 /* vp8li.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vp8li.h; path = src/dec/vp8li.h; sourceTree = SOURCE_ROOT; };
 		86A35A071D79BE80002DCEC2 /* webp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = webp.c; path = src/dec/webp.c; sourceTree = SOURCE_ROOT; };
 		86A35A081D79BE80002DCEC2 /* webpi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webpi.h; path = src/dec/webpi.h; sourceTree = SOURCE_ROOT; };
+		86DA98D31D7DD1380063A34F /* NSImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+WebP.h"; sourceTree = "<group>"; };
+		86DA98D41D7DD1380063A34F /* NSImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+WebP.m"; sourceTree = "<group>"; };
+		86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSImageWebPTester.m; sourceTree = "<group>"; };
+		86DA98D91D7DD4420063A34F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
+		86DA98E31D7DDC0A0063A34F /* Reference */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Reference; sourceTree = "<group>"; };
+		86DA98E51D7DDE070063A34F /* libChocolat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChocolat.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Debug/libChocolat.a"; sourceTree = "<group>"; };
+		86DA98E71D7DDE250063A34F /* libBCFoundation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBCFoundation.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Debug/libBCFoundation.a"; sourceTree = "<group>"; };
+		86DA98E91D7DDE7F0063A34F /* libECLogging.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libECLogging.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Debug/libECLogging.a"; sourceTree = "<group>"; };
 		86DD0E091D75C1F2008D5BB4 /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha.c; path = src/enc/alpha.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0A1D75C1F2008D5BB4 /* analysis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = analysis.c; path = src/enc/analysis.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0B1D75C1F2008D5BB4 /* backward_references.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references.c; path = src/enc/backward_references.c; sourceTree = SOURCE_ROOT; };
@@ -328,7 +332,6 @@
 		86DD0F331D75C2CD008D5BB4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/webp/types.h; sourceTree = SOURCE_ROOT; };
 		86DD0F3B1D75C340008D5BB4 /* WebP.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebP.pch; sourceTree = "<group>"; };
 		86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPTests.pch; sourceTree = "<group>"; };
-		86DD0F411D75CA86008D5BB4 /* WebPTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebPTester.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +346,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DA98EA1D7DDE7F0063A34F /* libECLogging.a in Frameworks */,
+				86DA98E81D7DDE250063A34F /* libBCFoundation.a in Frameworks */,
+				86DA98E61D7DDE070063A34F /* libChocolat.a in Frameworks */,
 				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
 				5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */,
 			);
@@ -370,13 +376,15 @@
 				5B42DE7E1A63D1930025C1EA /* Products */,
 				5B42DEAF1A63E44F0025C1EA /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		5B42DE7E1A63D1930025C1EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				5B42DE7D1A63D1930025C1EA /* libWebP.a */,
-				5B42DE881A63D1930025C1EA /* WebP.xctest */,
+				5B42DE881A63D1930025C1EA /* WebPTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,6 +392,7 @@
 		5B42DE971A63D9AD0025C1EA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				86DA98D21D7DD1040063A34F /* Bohemian */,
 				86DD0E451D75C237008D5BB4 /* dec */,
 				86DD0E441D75C235008D5BB4 /* demux */,
 				86DD0E431D75C233008D5BB4 /* dsp */,
@@ -409,9 +418,11 @@
 		5B42DE9E1A63DB3D0025C1EA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				86DA98D91D7DD4420063A34F /* Documents */,
+				86DA98E31D7DDC0A0063A34F /* Reference */,
 				86DD0F3D1D75C396008D5BB4 /* Supporting Files */,
 				5B42DEA21A63DBDA0025C1EA /* Info.plist */,
-				86DD0F411D75CA86008D5BB4 /* WebPTester.m */,
+				86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -419,6 +430,9 @@
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86DA98E91D7DDE7F0063A34F /* libECLogging.a */,
+				86DA98E71D7DDE250063A34F /* libBCFoundation.a */,
+				86DA98E51D7DDE070063A34F /* libChocolat.a */,
 				5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */,
 			);
 			name = Frameworks;
@@ -455,6 +469,15 @@
 				865C9AB81D79DFF400345AF9 /* utils.h */,
 			);
 			name = utils;
+			sourceTree = "<group>";
+		};
+		86DA98D21D7DD1040063A34F /* Bohemian */ = {
+			isa = PBXGroup;
+			children = (
+				86DA98D31D7DD1380063A34F /* NSImage+WebP.h */,
+				86DA98D41D7DD1380063A34F /* NSImage+WebP.m */,
+			);
+			name = Bohemian;
 			sourceTree = "<group>";
 		};
 		86DD0E081D75C1CD008D5BB4 /* enc */ = {
@@ -663,8 +686,8 @@
 				86A35A0C1D79BE80002DCEC2 /* common.h in Headers */,
 				86A35A141D79BE80002DCEC2 /* vp8i.h in Headers */,
 				865C9AC61D79DFF400345AF9 /* huffman.h in Headers */,
+				86DA98D51D7DD1380063A34F /* NSImage+WebP.h in Headers */,
 				86DD0E2D1D75C1F2008D5BB4 /* delta_palettization.h in Headers */,
-				86DD0F3F1D75C3A1008D5BB4 /* WebPTests.pch in Headers */,
 				5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */,
 				86DD0E3F1D75C1F2008D5BB4 /* vp8li.h in Headers */,
 				865C9ABB1D79DFF400345AF9 /* bit_reader.h in Headers */,
@@ -722,11 +745,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				5B42DE8B1A63D1930025C1EA /* PBXTargetDependency */,
 			);
 			name = WebPTests;
 			productName = BCCryptoTests;
-			productReference = 5B42DE881A63D1930025C1EA /* WebP.xctest */;
+			productReference = 5B42DE881A63D1930025C1EA /* WebPTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -735,7 +757,7 @@
 		5B42DE751A63D1930025C1EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Bohemian Coding";
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
@@ -769,6 +791,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DA98E41D7DDC0A0063A34F /* Reference in Resources */,
+				86DA98DA1D7DD4420063A34F /* Documents in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +812,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -882,6 +907,7 @@
 				86DD0E3C1D75C1F2008D5BB4 /* tree.c in Sources */,
 				863BC2241D75E12E00726200 /* enc_mips_dsp_r2.c in Sources */,
 				86DD0E361D75C1F2008D5BB4 /* picture_rescale.c in Sources */,
+				86DA98D61D7DD1380063A34F /* NSImage+WebP.m in Sources */,
 				86A35A131D79BE80002DCEC2 /* vp8.c in Sources */,
 				86DD0E321D75C1F2008D5BB4 /* iterator.c in Sources */,
 				86A35A151D79BE80002DCEC2 /* vp8l.c in Sources */,
@@ -906,19 +932,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86DD0F421D75CA86008D5BB4 /* WebPTester.m in Sources */,
+				86DA98D81D7DD3300063A34F /* NSImageWebPTester.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5B42DE8B1A63D1930025C1EA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5B42DE7C1A63D1930025C1EA /* WebP */;
-			targetProxy = 5B42DE8A1A63D1930025C1EA /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5B42DE8F1A63D1930025C1EA /* Debug */ = {
@@ -951,9 +969,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bohemiancoding.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = WebP;
 			};
 			name = Debug;
 		};
@@ -961,9 +976,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bohemiancoding.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = WebP;
 			};
 			name = Release;
 		};

@@ -1,12 +1,6 @@
 
 #ifdef __OBJC__
 
-#include "encode.h"
-#include "decode.h"
-#include "demux.h"
-#include "format_constants.h"
-#include "mux_types.h"
-#include "mux.h"
-#include "types.h"
+@import Cocoa;
 
 #endif

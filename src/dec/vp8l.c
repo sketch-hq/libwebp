@@ -1074,6 +1074,8 @@ static int DecodeImageData(VP8LDecoder* const dec, uint32_t* const data,
       htree_group = GetHtreeGroupForPos(hdr, col, row);
     }
     assert(htree_group != NULL);
+    // GRM - Fixed analyser warning
+    if (!htree_group) break;
     if (htree_group->is_trivial_code) {
       *src = htree_group->literal_arb;
       goto AdvanceByOne;
@@ -1149,7 +1151,7 @@ static int DecodeImageData(VP8LDecoder* const dec, uint32_t* const data,
           VP8LColorCacheInsert(color_cache, *last_cached++);
         }
       }
-    } else if (code < color_cache_limit) {  // Color cache
+    } else if (code < color_cache_limit && color_cache) {  // Color cache
       const int key = code - len_code_limit;
       assert(color_cache != NULL);
       while (last_cached < src) {
