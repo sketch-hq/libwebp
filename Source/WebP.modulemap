@@ -1,6 +1,5 @@
 module WebP {
     umbrella header "WebP.h"
-    link "webp"
 
     export *
     module * { export * }
