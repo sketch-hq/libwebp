@@ -1,4 +1,1 @@
 // Common settings for the WebP tests target go here.
-
-INFOPLIST_FILE = Tests/Info.plist
-PRODUCT_BUNDLE_IDENTIFIER = com.bohemiancoding.$(PRODUCT_NAME:rfc1034identifier)
