@@ -1,4 +1,4 @@
-#include "../BCFoundation/Configs/BCTestsDebug.xcconfig"
-#include "WebPTests.xcconfig"
+#include "../BCFoundation/Configs/BCDebug.xcconfig"
+#include "WebPTestsShared.xcconfig"
 
 // Debug-only settings for WebP tests go here

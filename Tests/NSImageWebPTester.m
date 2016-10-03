@@ -3,7 +3,7 @@
 //  Copyright © 2016 Bohemian Coding. All rights reserved.
 //
 
-#import "NSImage+WebP.h"
+@import WebP;
 
 @interface NSImageWebPTester : ECTestCase
 

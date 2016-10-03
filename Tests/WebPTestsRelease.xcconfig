@@ -1,4 +1,4 @@
-#include "../BCFoundation/Configs/BCTestsRelease.xcconfig"
-#include "WebPTests.xcconfig"
+#include "../BCFoundation/Configs/BCRelease.xcconfig"
+#include "WebPTestsShared.xcconfig"
 
 // Release-only settings for the WebP tests go here.

@@ -1,8 +1,5 @@
 module WebP {
     umbrella header "WebP.h"
-    link "webp"
-
-    config_macros [exhaustive] EC_DEBUG, EC_RELEASE
 
     export *
     module * { export * }

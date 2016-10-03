@@ -1,7 +1,0 @@
-#include "../Source/WebPShared.xcconfig"
-
-OTHER_LDFLAGS = $(inherited) -all_load // this appears to be required in order to work around a linker bug - when LTO is on (eg a release build), the linker will fail with an assertion. See https://github.com/BohemianCoding/Sketch/issues/4248.
-
-// Shared settings for libwebp Tests go here
-
-PRODUCT_NAME = $(TARGET_NAME)
