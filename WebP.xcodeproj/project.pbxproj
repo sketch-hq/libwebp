@@ -96,6 +96,8 @@
 		865C9AD01D79DFF400345AF9 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB61D79DFF400345AF9 /* thread.h */; };
 		865C9AD11D79DFF400345AF9 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 865C9AB71D79DFF400345AF9 /* utils.c */; };
 		865C9AD21D79DFF400345AF9 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB81D79DFF400345AF9 /* utils.h */; };
+		866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 866BE8261DA2B7C5004BD6D8 /* libz.tbd */; };
+		866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866BE8281DA2B7CC004BD6D8 /* libMinizip.a */; };
 		86A35A091D79BE80002DCEC2 /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359F91D79BE80002DCEC2 /* alpha.c */; };
 		86A35A0A1D79BE80002DCEC2 /* alphai.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A359FA1D79BE80002DCEC2 /* alphai.h */; };
 		86A35A0B1D79BE80002DCEC2 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359FB1D79BE80002DCEC2 /* buffer.c */; };
@@ -264,6 +266,8 @@
 		865C9AB61D79DFF400345AF9 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = thread.h; path = src/utils/thread.h; sourceTree = SOURCE_ROOT; };
 		865C9AB71D79DFF400345AF9 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = utils.c; path = src/utils/utils.c; sourceTree = SOURCE_ROOT; };
 		865C9AB81D79DFF400345AF9 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = src/utils/utils.h; sourceTree = SOURCE_ROOT; };
+		866BE8261DA2B7C5004BD6D8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		866BE8281DA2B7CC004BD6D8 /* libMinizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMinizip.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Release/libMinizip.a"; sourceTree = "<group>"; };
 		86A359F91D79BE80002DCEC2 /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha.c; path = src/dec/alpha.c; sourceTree = SOURCE_ROOT; };
 		86A359FA1D79BE80002DCEC2 /* alphai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alphai.h; path = src/dec/alphai.h; sourceTree = SOURCE_ROOT; };
 		86A359FB1D79BE80002DCEC2 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = buffer.c; path = src/dec/buffer.c; sourceTree = SOURCE_ROOT; };
@@ -346,6 +350,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */,
+				866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */,
 				86DA98EA1D7DDE7F0063A34F /* libECLogging.a in Frameworks */,
 				86DA98E81D7DDE250063A34F /* libBCFoundation.a in Frameworks */,
 				86DA98E61D7DDE070063A34F /* libChocolat.a in Frameworks */,
@@ -430,6 +436,8 @@
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
+				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
 				86DA98E91D7DDE7F0063A34F /* libECLogging.a */,
 				86DA98E71D7DDE250063A34F /* libBCFoundation.a */,
 				86DA98E51D7DDE070063A34F /* libChocolat.a */,
