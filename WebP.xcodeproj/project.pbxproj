@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */; };
-		5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libWebP.a */; };
+		5B42DF2A1A6412CD0025C1EA /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libwebp.a */; };
 		863BC20D1D75E12E00726200 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */; };
 		863BC20E1D75E12E00726200 /* alpha_processing_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D21D75E12D00726200 /* alpha_processing_sse2.c */; };
 		863BC20F1D75E12E00726200 /* alpha_processing_sse41.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D31D75E12D00726200 /* alpha_processing_sse41.c */; };
@@ -164,7 +164,7 @@
 		86DD0F381D75C2CD008D5BB4 /* mux_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F311D75C2CD008D5BB4 /* mux_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F391D75C2CD008D5BB4 /* mux.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F321D75C2CD008D5BB4 /* mux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3A1D75C2CD008D5BB4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F331D75C2CD008D5BB4 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86DD0F3C1D75C340008D5BB4 /* WebP.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* WebP.pch */; };
+		86DD0F3C1D75C340008D5BB4 /* webp.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* webp.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -174,7 +174,7 @@
 		22D0BF111AFA4F6100AE043D /* WebPTestsShared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsShared.xcconfig; sourceTree = "<group>"; };
 		22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsDebug.xcconfig; sourceTree = "<group>"; };
 		22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsRelease.xcconfig; sourceTree = "<group>"; };
-		5B42DE7D1A63D1930025C1EA /* libWebP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42DE7D1A63D1930025C1EA /* libwebp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwebp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE881A63D1930025C1EA /* WebPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE981A63D9AD0025C1EA /* WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebP.h; path = Source/WebP.h; sourceTree = "<group>"; };
 		5B42DEA21A63DBDA0025C1EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
@@ -334,7 +334,7 @@
 		86DD0F311D75C2CD008D5BB4 /* mux_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mux_types.h; path = src/webp/mux_types.h; sourceTree = SOURCE_ROOT; };
 		86DD0F321D75C2CD008D5BB4 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mux.h; path = src/webp/mux.h; sourceTree = SOURCE_ROOT; };
 		86DD0F331D75C2CD008D5BB4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/webp/types.h; sourceTree = SOURCE_ROOT; };
-		86DD0F3B1D75C340008D5BB4 /* WebP.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebP.pch; sourceTree = "<group>"; };
+		86DD0F3B1D75C340008D5BB4 /* webp.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webp.pch; sourceTree = "<group>"; };
 		86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPTests.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,7 +355,7 @@
 				86DA98EA1D7DDE7F0063A34F /* libECLogging.a in Frameworks */,
 				86DA98E81D7DDE250063A34F /* libBCFoundation.a in Frameworks */,
 				86DA98E61D7DDE070063A34F /* libChocolat.a in Frameworks */,
-				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
+				5B42DF2A1A6412CD0025C1EA /* libwebp.a in Frameworks */,
 				5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +366,7 @@
 		22D0BF161AFA523A00AE043D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				86DD0F3B1D75C340008D5BB4 /* WebP.pch */,
+				86DD0F3B1D75C340008D5BB4 /* webp.pch */,
 				5B42DE9A1A63D9BE0025C1EA /* Configs */,
 			);
 			name = "Supporting Files";
@@ -389,7 +389,7 @@
 		5B42DE7E1A63D1930025C1EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5B42DE7D1A63D1930025C1EA /* libWebP.a */,
+				5B42DE7D1A63D1930025C1EA /* libwebp.a */,
 				5B42DE881A63D1930025C1EA /* WebPTests.xctest */,
 			);
 			name = Products;
@@ -679,7 +679,7 @@
 				865C9AB91D79DFF400345AF9 /* bit_reader_inl.h in Headers */,
 				863BC2391D75E12E00726200 /* msa_macro.h in Headers */,
 				865C9AD01D79DFF400345AF9 /* thread.h in Headers */,
-				86DD0F3C1D75C340008D5BB4 /* WebP.pch in Headers */,
+				86DD0F3C1D75C340008D5BB4 /* webp.pch in Headers */,
 				865C9AD21D79DFF400345AF9 /* utils.h in Headers */,
 				86DD0F381D75C2CD008D5BB4 /* mux_types.h in Headers */,
 				863BC2481D75E12E00726200 /* yuv.h in Headers */,
@@ -724,9 +724,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5B42DE7C1A63D1930025C1EA /* WebP */ = {
+		5B42DE7C1A63D1930025C1EA /* webp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5B42DE911A63D1930025C1EA /* Build configuration list for PBXNativeTarget "WebP" */;
+			buildConfigurationList = 5B42DE911A63D1930025C1EA /* Build configuration list for PBXNativeTarget "webp" */;
 			buildPhases = (
 				5B42DE791A63D1930025C1EA /* Sources */,
 				5B42DE7A1A63D1930025C1EA /* Frameworks */,
@@ -737,9 +737,9 @@
 			);
 			dependencies = (
 			);
-			name = WebP;
+			name = webp;
 			productName = BCCrypto;
-			productReference = 5B42DE7D1A63D1930025C1EA /* libWebP.a */;
+			productReference = 5B42DE7D1A63D1930025C1EA /* libwebp.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		5B42DE871A63D1930025C1EA /* WebPTests */ = {
@@ -788,7 +788,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5B42DE7C1A63D1930025C1EA /* WebP */,
+				5B42DE7C1A63D1930025C1EA /* webp */,
 				5B42DE871A63D1930025C1EA /* WebPTests */,
 			);
 		};
@@ -999,7 +999,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5B42DE911A63D1930025C1EA /* Build configuration list for PBXNativeTarget "WebP" */ = {
+		5B42DE911A63D1930025C1EA /* Build configuration list for PBXNativeTarget "webp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B42DE921A63D1930025C1EA /* Debug */,
