@@ -3,12 +3,12 @@
 
 @import Cocoa;
 
-#include "webp/encode.h"
-#include "webp/decode.h"
-#include "webp/demux.h"
-#include "webp/format_constants.h"
-#include "webp/mux_types.h"
-#include "webp/mux.h"
-#include "webp/types.h"
+#import "webp/encode.h"
+#import "webp/decode.h"
+#import "webp/demux.h"
+#import "webp/format_constants.h"
+#import "webp/mux_types.h"
+#import "webp/mux.h"
+#import "webp/types.h"
 
 #import "NSImage+WebP.h"
