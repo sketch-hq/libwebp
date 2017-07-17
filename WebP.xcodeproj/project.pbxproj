@@ -770,9 +770,11 @@
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0900;
 					};
 					5B42DE871A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
