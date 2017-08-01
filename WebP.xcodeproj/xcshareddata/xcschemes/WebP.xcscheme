@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F57721E41A67F64900839649"
                BuildableName = "libBCFoundation.a"
-               BlueprintName = "BCFoundation"
+               BlueprintName = "BCFoundationStatic"
                ReferencedContainer = "container:../BCFoundation/BCFoundation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
