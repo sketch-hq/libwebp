@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "228CF1E817562478003E1D25"
-               BuildableName = "libECLogging.a"
-               BlueprintName = "ECLoggingMacStatic"
+               BlueprintIdentifier = "2251B9FE15DBCC3E00F2FE40"
+               BuildableName = "ECLogging.framework"
+               BlueprintName = "ECLoggingMac"
                ReferencedContainer = "container:../ECLogging/ECLogging.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F57721E41A67F64900839649"
-               BuildableName = "libBCFoundation.a"
-               BlueprintName = "BCFoundationStatic"
+               BlueprintIdentifier = "22A474D51F28E673000BA2D3"
+               BuildableName = "BCFoundation.framework"
+               BlueprintName = "BCFoundation"
                ReferencedContainer = "container:../BCFoundation/BCFoundation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
