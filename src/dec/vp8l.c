@@ -954,14 +954,16 @@ static int DecodeAlphaData(VP8LDecoder* const dec, uint8_t* const data,
   assert(Is8bOptimizable(hdr));
 
   while (!br->eos_ && pos < last) {
-    int code;
+    int code = 0;
     // Only update when changing tile.
     if ((col & mask) == 0) {
       htree_group = GetHtreeGroupForPos(hdr, col, row);
     }
     assert(htree_group != NULL);
     VP8LFillBitWindow(br);
-    code = ReadSymbol(htree_group->htrees[GREEN], br);
+    if (htree_group != NULL) {
+      code = ReadSymbol(htree_group->htrees[GREEN], br);
+    }
     if (code < NUM_LITERAL_CODES) {  // Literal
       data[pos] = code;
       ++pos;
