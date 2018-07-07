@@ -1,3 +1,6 @@
+ZTRACE_WEBPRELEASE = 117
+ZTRACE_PATH = $(inherited)_117
+
 #include "../BCFoundation/Configs/BCRelease.xcconfig"
 
 #include "WebPShared.xcconfig"

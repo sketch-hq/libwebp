@@ -1,3 +1,6 @@
+ZTRACE_WEBPSHARED = 116
+ZTRACE_PATH = $(inherited)_116
+
 #include "../BCFoundation/Configs/BCStaticLibrary.xcconfig"
 
 // Common settings for the WebP project go here.
