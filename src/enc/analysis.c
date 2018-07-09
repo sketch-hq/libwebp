@@ -156,6 +156,7 @@ static void AssignSegments(VP8Encoder* const enc,
 
   assert(nb >= 1);
   assert(nb <= NUM_MB_SEGMENTS);
+  if (nb < 1) return; // GRM - Fixed analyser warning
 
   // bracket the input
   for (n = 0; n <= MAX_ALPHA && alphas[n] == 0; ++n) {}
@@ -444,12 +445,14 @@ static int DoSegmentsJob(SegmentJob* const job, VP8EncIterator* const it) {
   return ok;
 }
 
+#ifdef WEBP_USE_THREAD // GRM - Fixed analyser warning
 static void MergeJobs(const SegmentJob* const src, SegmentJob* const dst) {
   int i;
   for (i = 0; i <= MAX_ALPHA; ++i) dst->alphas[i] += src->alphas[i];
   dst->alpha += src->alpha;
   dst->uv_alpha += src->uv_alpha;
 }
+#endif
 
 // initialize the job struct with some TODOs
 static void InitSegmentJob(VP8Encoder* const enc, SegmentJob* const job,
@@ -479,17 +482,21 @@ int VP8EncAnalyze(VP8Encoder* const enc) {
   if (do_segments) {
     const int last_row = enc->mb_h_;
     // We give a little more than a half work to the main thread.
+#ifdef WEBP_USE_THREAD // GRM - Fixed analyser warning
     const int split_row = (9 * last_row + 15) >> 4;
+#endif
     const int total_mb = last_row * enc->mb_w_;
 #ifdef WEBP_USE_THREAD
     const int kMinSplitRow = 2;  // minimal rows needed for mt to be worth it
     const int do_mt = (enc->thread_level_ > 0) && (split_row >= kMinSplitRow);
 #else
-    const int do_mt = 0;
+    // GRM - Fixed analyser warning
+//    const int do_mt = 0;
 #endif
     const WebPWorkerInterface* const worker_interface =
         WebPGetWorkerInterface();
     SegmentJob main_job;
+#ifdef WEBP_USE_THREAD // GRM - Fixed analyser warning
     if (do_mt) {
       SegmentJob side_job;
       // Note the use of '&' instead of '&&' because we must call the functions
@@ -508,7 +515,9 @@ int VP8EncAnalyze(VP8Encoder* const enc) {
       }
       worker_interface->End(&side_job.worker);
       if (ok) MergeJobs(&side_job, &main_job);  // merge results together
-    } else {
+    } else
+#endif
+    {
       // Even for single-thread case, we use the generic Worker tools.
       InitSegmentJob(enc, &main_job, 0, last_row);
       worker_interface->Execute(&main_job.worker);

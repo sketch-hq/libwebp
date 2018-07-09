@@ -1,0 +1,8 @@
+ZTRACE_WEBPRELEASE = 117
+ZTRACE_PATH = $(inherited)_117
+
+#include "../BCFoundation/Configs/BCRelease.xcconfig"
+
+#include "WebPShared.xcconfig"
+
+// Release-only settings for the libwebp project go here.

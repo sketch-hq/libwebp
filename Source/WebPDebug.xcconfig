@@ -1,0 +1,8 @@
+ZTRACE_WEBPDEBUG = 115
+ZTRACE_PATH = $(inherited)_115
+
+#include "../BCFoundation/Configs/BCDebug.xcconfig"
+
+#include "WebPShared.xcconfig"
+
+// Debug-only settings for the libwebp project go here.

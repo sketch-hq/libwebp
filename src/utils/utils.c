@@ -188,6 +188,7 @@ void* WebPSafeMalloc(uint64_t nmemb, size_t size) {
   Increment(&num_malloc_calls);
   if (!CheckSizeArgumentsOverflow(nmemb, size)) return NULL;
   assert(nmemb * size > 0);
+  if(nmemb * size <= 0) return NULL; // GRM - Fixed analyser warning
   ptr = malloc((size_t)(nmemb * size));
   AddMem(ptr, (size_t)(nmemb * size));
   return ptr;
