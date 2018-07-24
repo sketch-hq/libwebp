@@ -5,7 +5,7 @@
 
 @import WebP;
 
-@interface NSImageWebPTester : ECTestCase
+@interface NSImageWebPTester : BCTestCase
 
 @end
 
@@ -14,37 +14,37 @@
 - (void)testImageLoaded {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Strawberry" withExtension:@"webp" subdirectory:@"Documents"];
-  ECTestAssertNotNil( url );
+  BCTestAssertNotNil( url );
 
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNotNil( image );
+  BCTestAssertNotNil( image );
 
   url = [bundle URLForResource:@"Strawberry" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNotNil( url );
+  BCTestAssertNotNil( url );
   NSImage* expectedImage = [[NSImage alloc] initWithContentsOfURL:url];
-  ECTestAssertNotNil( expectedImage );
+  BCTestAssertNotNil( expectedImage );
   NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
 
   NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
   
   BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
-  ECTestAssertTrue( imagesMatch );
+  BCTestAssertTrue( imagesMatch );
 }
 
 - (void)testBadURL {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Strawberry" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNotNil( url );
+  BCTestAssertNotNil( url );
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNil( image );
+  BCTestAssertNil( image );
 }
 
 - (void)testNilURL {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Doesn't exist" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNil( url );
+  BCTestAssertNil( url );
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNil( image );
+  BCTestAssertNil( image );
 }
 
 @end
