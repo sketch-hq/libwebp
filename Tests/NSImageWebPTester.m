@@ -2,8 +2,9 @@
 //  Created by Gavin on 05/09/2016.
 //  Copyright © 2016 Bohemian Coding. All rights reserved.
 //
-
+@import ECUnitTests;
 @import WebP;
+@import Chocolat;
 
 @interface NSImageWebPTester : ECTestCase
 
