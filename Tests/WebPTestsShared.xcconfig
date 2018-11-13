@@ -1,0 +1,7 @@
+ZTRACE_WEBPTESTSSHARED = 119
+ZTRACE_PATH = $(inherited)_119
+
+// inherit standard settings for test targets from BCFoundation
+#include "../BCFoundation/Configs/BCTests.xcconfig"
+
+// Common settings for the WebP tests target go here.

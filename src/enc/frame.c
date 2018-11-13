@@ -661,7 +661,8 @@ static int PreLoopInitialize(VP8Encoder* const enc) {
 
 static int PostLoopFinalize(VP8EncIterator* const it, int ok) {
   VP8Encoder* const enc = it->enc_;
-  if (ok) {      // Finalize the partitions, check for extra errors.
+  // GRM - Fixed analyser warning
+  if (ok && enc) {      // Finalize the partitions, check for extra errors.
     int p;
     for (p = 0; p < enc->num_parts_; ++p) {
       VP8BitWriterFinish(enc->parts_ + p);
@@ -669,7 +670,8 @@ static int PostLoopFinalize(VP8EncIterator* const it, int ok) {
     }
   }
 
-  if (ok) {      // All good. Finish up.
+  // GRM - Fixed analyser warning
+  if (ok && enc && enc->pic_) {      // All good. Finish up.
     if (enc->pic_->stats != NULL) {  // finalize byte counters...
       int i, s;
       for (i = 0; i <= 2; ++i) {
@@ -743,6 +745,7 @@ int VP8EncTokenLoop(VP8Encoder* const enc) {
   int num_pass_left = enc->config_->pass;
   const int do_search = enc->do_search_;
   VP8EncIterator it;
+  it.enc_ = NULL; // GRM - Fixed analyser warning
   VP8EncProba* const proba = &enc->proba_;
   const VP8RDLevel rd_opt = enc->rd_opt_level_;
   const uint64_t pixel_count = enc->mb_w_ * enc->mb_h_ * 384;

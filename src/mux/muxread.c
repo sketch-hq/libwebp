@@ -394,7 +394,12 @@ static WebPMuxError SynthesizeBitstream(const WebPMuxImage* const wpi,
   }
 
   // Bitstream.
-  dst = ChunkListEmit(wpi->img_, dst);
+#if NDEBUG
+#else
+  // GRM - Fixed analyser warning
+  dst =
+#endif
+  ChunkListEmit(wpi->img_, dst);
   assert(dst == data + size);
 
   // Output.
