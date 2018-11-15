@@ -1,7 +1,0 @@
-ZTRACE_WEBPTESTSRELEASE = 118
-ZTRACE_PATH = $(inherited)_118
-
-#include "../BCFoundation/Configs/BCRelease.xcconfig"
-#include "WebPTestsShared.xcconfig"
-
-// Release-only settings for the WebP tests go here.

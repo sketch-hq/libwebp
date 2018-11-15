@@ -1,7 +1,0 @@
-ZTRACE_WEBPTESTSDEBUG = 120
-ZTRACE_PATH = $(inherited)_120
-
-#include "../BCFoundation/Configs/BCDebug.xcconfig"
-#include "WebPTestsShared.xcconfig"
-
-// Debug-only settings for WebP tests go here
