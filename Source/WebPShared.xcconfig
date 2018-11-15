@@ -1,9 +1,0 @@
-ZTRACE_WEBPSHARED = 116
-ZTRACE_PATH = $(inherited)_116
-
-#include "../BCFoundation/Configs/BCStaticLibrary.xcconfig"
-
-// Common settings for the WebP project go here.
-
-CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO // This causes about 360 warnings!
-OTHER_LDFLAGS = -all_load $(BC_LD_FLAGS) $(BC_LD_SANITIZE) // due to an incompatibility with LTO and dead-stripping in XC7.2.1, we need to include -all_load... sigh

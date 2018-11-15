@@ -405,16 +405,14 @@ WebPMuxError WebPMuxDeleteFrame(WebPMux* mux, uint32_t nth) {
 static WebPMuxError GetFrameFragmentInfo(
     const WebPChunk* const frame_frgm_chunk,
     int* const x_offset, int* const y_offset, int* const duration) {
-  // GRM - Fixed analyser warning
-  const uint32_t tag = frame_frgm_chunk ? frame_frgm_chunk->tag_ : 0;
+  const uint32_t tag = frame_frgm_chunk->tag_;
   const int is_frame = (tag == kChunks[IDX_ANMF].tag);
   const WebPData* const data = &frame_frgm_chunk->data_;
   const size_t expected_data_size =
       is_frame ? ANMF_CHUNK_SIZE : FRGM_CHUNK_SIZE;
   assert(frame_frgm_chunk != NULL);
   assert(tag == kChunks[IDX_ANMF].tag || tag ==  kChunks[IDX_FRGM].tag);
-  // GRM - Fixed analyser warning
-  if (!data || data->size != expected_data_size) return WEBP_MUX_INVALID_ARGUMENT;
+  if (data->size != expected_data_size) return WEBP_MUX_INVALID_ARGUMENT;
 
   *x_offset = 2 * GetLE24(data->bytes + 0);
   *y_offset = 2 * GetLE24(data->bytes + 3);
@@ -594,12 +592,7 @@ static WebPMuxError MuxCleanup(WebPMux* const mux) {
   if (err != WEBP_MUX_OK) return err;
   if (num_frames == 1 || num_fragments == 1) {
     WebPMuxImage* frame_frag;
-#if NDEBUG
-#else
-    // GRM - Fixed analyser warning
-    err =
-#endif
-    MuxImageGetNth((const WebPMuxImage**)&mux->images_, 1, &frame_frag);
+    err = MuxImageGetNth((const WebPMuxImage**)&mux->images_, 1, &frame_frag);
     assert(err == WEBP_MUX_OK);  // We know that one frame/fragment does exist.
     assert(frame_frag != NULL);
     if (frame_frag->header_ != NULL &&
@@ -682,13 +675,7 @@ WebPMuxError WebPMuxAssemble(WebPMux* mux, WebPData* assembled_data) {
   dst = ImageListEmit(mux->images_, dst);
   dst = ChunkListEmit(mux->exif_, dst);
   dst = ChunkListEmit(mux->xmp_, dst);
-
-#if NDEBUG
-#else
-  // GRM - Fixed analyser warning
-  dst =
-#endif
-  ChunkListEmit(mux->unknown_, dst);
+  dst = ChunkListEmit(mux->unknown_, dst);
   assert(dst == data + size);
 
   // Validate mux.

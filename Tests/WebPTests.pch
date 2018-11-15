@@ -1,7 +1,0 @@
-
-#ifdef __OBJC__
-
-@import ECUnitTests;
-@import Chocolat;
-
-#endif

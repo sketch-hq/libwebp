@@ -218,9 +218,8 @@ static VP8Encoder* InitVP8Encoder(const WebPConfig* const config,
   mem = (uint8_t*)WEBP_ALIGN(mem);
   enc->y_top_ = (uint8_t*)mem;
   enc->uv_top_ = enc->y_top_ + top_stride;
-
-  // GRM - Fixed analyser warning
-  assert((mem + (2 * top_stride)) <= (uint8_t*)enc + size);
+  mem += 2 * top_stride;
+  assert(mem <= (uint8_t*)enc + size);
 
   enc->config_ = config;
   enc->profile_ = use_filter ? ((config->filter_type == 1) ? 0 : 1) : 2;
