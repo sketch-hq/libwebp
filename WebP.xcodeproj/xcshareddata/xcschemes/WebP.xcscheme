@@ -42,8 +42,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F59B38351472A9A100B2FE98"
-               BuildableName = "libChocolat.a"
+               BlueprintIdentifier = "4368978B21A2C434007BD228"
+               BuildableName = "Chocolat.framework"
                BlueprintName = "Chocolat"
                ReferencedContainer = "container:../Chocolat/Chocolat.xcodeproj">
             </BuildableReference>
