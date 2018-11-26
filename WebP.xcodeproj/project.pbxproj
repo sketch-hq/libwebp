@@ -288,7 +288,6 @@
 		86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSImageWebPTester.m; sourceTree = "<group>"; };
 		86DA98D91D7DD4420063A34F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
 		86DA98E31D7DDC0A0063A34F /* Reference */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Reference; sourceTree = "<group>"; };
-		86DA98E51D7DDE070063A34F /* libChocolat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChocolat.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Debug/libChocolat.a"; sourceTree = "<group>"; };
 		86DD0E091D75C1F2008D5BB4 /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha.c; path = src/enc/alpha.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0A1D75C1F2008D5BB4 /* analysis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = analysis.c; path = src/enc/analysis.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0B1D75C1F2008D5BB4 /* backward_references.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references.c; path = src/enc/backward_references.c; sourceTree = SOURCE_ROOT; };
@@ -434,7 +433,6 @@
 				4368984621A30F67007BD228 /* Chocolat.framework */,
 				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
 				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
-				86DA98E51D7DDE070063A34F /* libChocolat.a */,
 				5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */,
 			);
 			name = Frameworks;
