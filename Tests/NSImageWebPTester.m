@@ -48,4 +48,24 @@
   ECTestAssertNil( image );
 }
 
+- (void)testPremultipliedAlpha {
+  NSBundle *bundle = [NSBundle bundleForClass:self.class];
+  NSURL *url = [bundle URLForResource:@"AlphaTest" withExtension:@"webp" subdirectory:@"Documents"];
+  ECTestAssertNotNil( url );
+  
+  NSImage *image = [NSImage imageWithWebPURL:url];
+  ECTestAssertNotNil( image );
+  
+  url = [bundle URLForResource:@"AlphaTest" withExtension:@"png" subdirectory:@"Reference"];
+  ECTestAssertNotNil( url );
+  NSImage* expectedImage = [[NSImage alloc] initWithContentsOfURL:url];
+  ECTestAssertNotNil( expectedImage );
+  NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
+  NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
+  
+  BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
+  ECTestAssertTrue( imagesMatch );
+}
+
+
 @end
