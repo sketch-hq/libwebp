@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA5821DF659F0091CB78 /* BCFoundation.framework */; };
 		4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368984621A30F67007BD228 /* Chocolat.framework */; };
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */; };
@@ -172,6 +173,7 @@
 		22D0BF111AFA4F6100AE043D /* WebPTestsShared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsShared.xcconfig; sourceTree = "<group>"; };
 		22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsDebug.xcconfig; sourceTree = "<group>"; };
 		22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsRelease.xcconfig; sourceTree = "<group>"; };
+		278CAA5821DF659F0091CB78 /* BCFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368984621A30F67007BD228 /* Chocolat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chocolat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE7D1A63D1930025C1EA /* libWebP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE881A63D1930025C1EA /* WebPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -346,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
 				866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */,
 				866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */,
 				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
@@ -430,6 +433,7 @@
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
 				4368984621A30F67007BD228 /* Chocolat.framework */,
 				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
 				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
@@ -762,10 +766,12 @@
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = WUGMZZ5K46;
 						LastSwiftMigration = 0900;
 					};
 					5B42DE871A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = WUGMZZ5K46;
 						LastSwiftMigration = 0900;
 					};
 				};
