@@ -778,7 +778,7 @@
 			};
 			buildConfigurationList = 5B42DE781A63D1930025C1EA /* Build configuration list for PBXProject "WebP" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
