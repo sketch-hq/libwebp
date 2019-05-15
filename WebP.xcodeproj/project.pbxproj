@@ -762,15 +762,13 @@
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = WUGMZZ5K46;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					5B42DE871A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = WUGMZZ5K46;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
