@@ -1,8 +1,13 @@
-ZTRACE_WEBPRELEASE = 117
-ZTRACE_PATH = $(inherited)_117
+#include "../BCFoundation/Configs/BCCore.xcconfig"
+#include "../BCFoundation/Configs/BCStaticLibrary.xcconfig"
 
-#include "../BCFoundation/Configs/BCRelease.xcconfig"
+// Common settings for the WebP project go here.
+OTHER_LDFLAGS = -all_load $(BC_LD_FLAGS) // due to an incompatibility with LTO and dead-stripping in XC7.2.1, we need to include -all_load... sigh
+MODULEMAP_FILE = Source/$(PRODUCT_NAME).modulemap
 
-#include "WebPShared.xcconfig"
-
-// Release-only settings for the libwebp project go here.
+CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO // This causes about 360 warnings!
+CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO
+GCC_WARN_UNUSED_PARAMETER = NO
+GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO
+GCC_WARN_SIGN_COMPARE = NO
+GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO
