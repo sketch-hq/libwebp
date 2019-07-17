@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -758,7 +758,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "Bohemian Coding";
+				ORGANIZATIONNAME = Sketch;
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -773,7 +773,7 @@
 				};
 			};
 			buildConfigurationList = 5B42DE781A63D1930025C1EA /* Build configuration list for PBXProject "WebP" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
