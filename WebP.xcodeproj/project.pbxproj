@@ -816,7 +816,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../ECLogging/Extras/Scripts/package-mac-static-library.sh\"\n";
+			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../ECUnitTests/Extras/package-mac-static-library.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
