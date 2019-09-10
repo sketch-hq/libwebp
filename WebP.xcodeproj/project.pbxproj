@@ -757,7 +757,7 @@
 		5B42DE751A63D1930025C1EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Sketch;
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
