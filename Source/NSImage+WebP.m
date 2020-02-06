@@ -17,7 +17,7 @@ NSString * const NSImageUTTypeWebP = @"public.webp";
   int height = 0;
   UInt8 *webp = WebPDecodeRGBA( data.bytes, data.length, &width, &height );
   if (webp) {
-    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bitmapFormat:NS32BitLittleEndianBitmapFormat | NSAlphaNonpremultipliedBitmapFormat bytesPerRow:4 * width bitsPerPixel:32];
+    NSBitmapImageRep *rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL pixelsWide:width pixelsHigh:height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bitmapFormat:NSBitmapFormatThirtyTwoBitLittleEndian | NSBitmapFormatAlphaNonpremultiplied bytesPerRow:4 * width bitsPerPixel:32];
     memcpy( rep.bitmapData, webp, width * height * 4 );
     WebPFree( webp );
     result = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
