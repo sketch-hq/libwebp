@@ -1408,8 +1408,8 @@ static void HE8uv(uint8_t* dst) {    // horizontal
 }
 
 static WEBP_INLINE void DC8(uint8_t* dst, int do_top, int do_left) {
-  uint16x8_t sum_top;
-  uint16x8_t sum_left;
+  uint16x8_t sum_top = 0;
+  uint16x8_t sum_left = 0;
   uint8x8_t dc0;
 
   if (do_top) {
