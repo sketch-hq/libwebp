@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA5821DF659F0091CB78 /* BCFoundation.framework */; };
 		4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368984621A30F67007BD228 /* Chocolat.framework */; };
+		439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439B2C1524BF3D57008B430F /* ECUnitTests.framework */; };
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */; };
 		5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libWebP.a */; };
 		863BC20D1D75E12E00726200 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */; };
 		863BC20E1D75E12E00726200 /* alpha_processing_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D21D75E12D00726200 /* alpha_processing_sse2.c */; };
@@ -173,11 +173,11 @@
 		22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsRelease.xcconfig; sourceTree = "<group>"; };
 		278CAA5821DF659F0091CB78 /* BCFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368984621A30F67007BD228 /* Chocolat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chocolat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		439B2C1524BF3D57008B430F /* ECUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ECUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE7D1A63D1930025C1EA /* libWebP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE881A63D1930025C1EA /* WebPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE981A63D9AD0025C1EA /* WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebP.h; path = Source/WebP.h; sourceTree = "<group>"; };
 		5B42DEA21A63DBDA0025C1EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ECUnitTests.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BCCrypto-efurtmprkzemrwgfkjfqnkiilreb/Build/Products/Debug/ECUnitTests.framework"; sourceTree = "<group>"; };
 		5B42DF261A63F3400025C1EA /* WebP.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = WebP.modulemap; path = Source/WebP.modulemap; sourceTree = "<group>"; };
 		863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha_processing_mips_dsp_r2.c; path = src/dsp/alpha_processing_mips_dsp_r2.c; sourceTree = SOURCE_ROOT; };
 		863BC1D21D75E12D00726200 /* alpha_processing_sse2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha_processing_sse2.c; path = src/dsp/alpha_processing_sse2.c; sourceTree = SOURCE_ROOT; };
@@ -331,7 +331,6 @@
 		86DD0F321D75C2CD008D5BB4 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mux.h; path = src/webp/mux.h; sourceTree = SOURCE_ROOT; };
 		86DD0F331D75C2CD008D5BB4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/webp/types.h; sourceTree = SOURCE_ROOT; };
 		86DD0F3B1D75C340008D5BB4 /* webp.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webp.pch; sourceTree = "<group>"; };
-		86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPTests.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,12 +345,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
 				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
 				866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */,
 				866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */,
 				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
 				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
-				5B42DEAE1A63E4350025C1EA /* ECUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,9 +431,9 @@
 			children = (
 				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
 				4368984621A30F67007BD228 /* Chocolat.framework */,
+				439B2C1524BF3D57008B430F /* ECUnitTests.framework */,
 				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
 				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
-				5B42DEAD1A63E4350025C1EA /* ECUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -644,7 +643,6 @@
 		86DD0F3D1D75C396008D5BB4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				86DD0F3E1D75C3A1008D5BB4 /* WebPTests.pch */,
 				86DD0F401D75C3A7008D5BB4 /* Configs */,
 			);
 			name = "Supporting Files";
