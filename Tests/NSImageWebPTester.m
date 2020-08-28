@@ -15,56 +15,56 @@
 - (void)testImageLoaded {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Strawberry" withExtension:@"webp" subdirectory:@"Documents"];
-  ECTestAssertNotNil( url );
+  XCTAssertNotNil( url );
 
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNotNil( image );
+  XCTAssertNotNil( image );
 
   url = [bundle URLForResource:@"Strawberry" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNotNil( url );
+  XCTAssertNotNil( url );
   NSImage* expectedImage = [[NSImage alloc] initWithContentsOfURL:url];
-  ECTestAssertNotNil( expectedImage );
+  XCTAssertNotNil( expectedImage );
   NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
 
   NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
   
   BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
-  ECTestAssertTrue( imagesMatch );
+  XCTAssertTrue( imagesMatch );
 }
 
 - (void)testBadURL {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Strawberry" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNotNil( url );
+  XCTAssertNotNil( url );
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNil( image );
+  XCTAssertNil( image );
 }
 
 - (void)testNilURL {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"Doesn't exist" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNil( url );
+  XCTAssertNil( url );
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNil( image );
+  XCTAssertNil( image );
 }
 
 - (void)testPremultipliedAlpha {
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSURL *url = [bundle URLForResource:@"AlphaTest" withExtension:@"webp" subdirectory:@"Documents"];
-  ECTestAssertNotNil( url );
+  XCTAssertNotNil( url );
   
   NSImage *image = [NSImage imageWithWebPURL:url];
-  ECTestAssertNotNil( image );
+  XCTAssertNotNil( image );
   
   url = [bundle URLForResource:@"AlphaTest" withExtension:@"png" subdirectory:@"Reference"];
-  ECTestAssertNotNil( url );
+  XCTAssertNotNil( url );
   NSImage* expectedImage = [[NSImage alloc] initWithContentsOfURL:url];
-  ECTestAssertNotNil( expectedImage );
+  XCTAssertNotNil( expectedImage );
   NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
   NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
   
   BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
-  ECTestAssertTrue( imagesMatch );
+  XCTAssertTrue( imagesMatch );
 }
 
 
