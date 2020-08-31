@@ -594,7 +594,7 @@ static WebPMuxError MuxCleanup(WebPMux* const mux) {
   if (err != WEBP_MUX_OK) return err;
   if (num_frames == 1 || num_fragments == 1) {
     WebPMuxImage* frame_frag;
-#if NDEBUG
+#ifndef DEBUG
 #else
     // GRM - Fixed analyser warning
     err =
@@ -683,7 +683,7 @@ WebPMuxError WebPMuxAssemble(WebPMux* mux, WebPData* assembled_data) {
   dst = ChunkListEmit(mux->exif_, dst);
   dst = ChunkListEmit(mux->xmp_, dst);
 
-#if NDEBUG
+#ifndef DEBUG
 #else
   // GRM - Fixed analyser warning
   dst =
