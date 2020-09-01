@@ -394,7 +394,7 @@ static WebPMuxError SynthesizeBitstream(const WebPMuxImage* const wpi,
   }
 
   // Bitstream.
-#if NDEBUG
+#ifndef DEBUG
 #else
   // GRM - Fixed analyser warning
   dst =
