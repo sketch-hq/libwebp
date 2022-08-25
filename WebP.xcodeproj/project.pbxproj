@@ -811,6 +811,7 @@
 			);
 			name = "Package Modules";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/libWebP.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
