@@ -164,6 +164,7 @@
 		86DD0F391D75C2CD008D5BB4 /* mux.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F321D75C2CD008D5BB4 /* mux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3A1D75C2CD008D5BB4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F331D75C2CD008D5BB4 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3C1D75C340008D5BB4 /* webp.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* webp.pch */; };
+		86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F54FDB29F00A1200146B44 /* Security.framework */; };
 		9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD5FFDE29E5DC940068601F /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -332,6 +333,7 @@
 		86DD0F321D75C2CD008D5BB4 /* mux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mux.h; path = src/webp/mux.h; sourceTree = SOURCE_ROOT; };
 		86DD0F331D75C2CD008D5BB4 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/webp/types.h; sourceTree = SOURCE_ROOT; };
 		86DD0F3B1D75C340008D5BB4 /* webp.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = webp.pch; sourceTree = "<group>"; };
+		86F54FDB29F00A1200146B44 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD5FFDE29E5DC940068601F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -347,6 +349,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */,
 				9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */,
 				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
 				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
@@ -432,6 +435,7 @@
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86F54FDB29F00A1200146B44 /* Security.framework */,
 				9DD5FFDE29E5DC940068601F /* Cocoa.framework */,
 				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
 				4368984621A30F67007BD228 /* Chocolat.framework */,
