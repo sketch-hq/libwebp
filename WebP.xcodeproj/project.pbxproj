@@ -98,8 +98,6 @@
 		865C9AD01D79DFF400345AF9 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB61D79DFF400345AF9 /* thread.h */; };
 		865C9AD11D79DFF400345AF9 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 865C9AB71D79DFF400345AF9 /* utils.c */; };
 		865C9AD21D79DFF400345AF9 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB81D79DFF400345AF9 /* utils.h */; };
-		866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 866BE8261DA2B7C5004BD6D8 /* libz.tbd */; };
-		866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 866BE8281DA2B7CC004BD6D8 /* libMinizip.a */; };
 		86A35A091D79BE80002DCEC2 /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359F91D79BE80002DCEC2 /* alpha.c */; };
 		86A35A0A1D79BE80002DCEC2 /* alphai.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A359FA1D79BE80002DCEC2 /* alphai.h */; };
 		86A35A0B1D79BE80002DCEC2 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359FB1D79BE80002DCEC2 /* buffer.c */; };
@@ -353,8 +351,6 @@
 				9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */,
 				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
 				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
-				866BE8291DA2B7CC004BD6D8 /* libMinizip.a in Frameworks */,
-				866BE8271DA2B7C5004BD6D8 /* libz.tbd in Frameworks */,
 				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
 				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
 			);
