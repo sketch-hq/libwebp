@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA5821DF659F0091CB78 /* BCFoundation.framework */; };
 		4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368984621A30F67007BD228 /* Chocolat.framework */; };
-		439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439B2C1524BF3D57008B430F /* ECUnitTests.framework */; };
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libWebP.a */; };
 		863BC20D1D75E12E00726200 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */; };
@@ -352,7 +351,6 @@
 				866F1CEC2AA8E15300A55CAC /* SketchModelTestKit.framework in Frameworks */,
 				86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */,
 				9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */,
-				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
 				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
 				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
 				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
@@ -823,7 +821,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../ECUnitTests/Extras/package-mac-static-library.sh\"\n";
+			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../../Extras/Scripts/package-mac-static-library.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
