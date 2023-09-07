@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA5821DF659F0091CB78 /* BCFoundation.framework */; };
 		4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368984621A30F67007BD228 /* Chocolat.framework */; };
-		439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439B2C1524BF3D57008B430F /* ECUnitTests.framework */; };
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libWebP.a */; };
 		863BC20D1D75E12E00726200 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */; };
@@ -98,6 +97,7 @@
 		865C9AD01D79DFF400345AF9 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB61D79DFF400345AF9 /* thread.h */; };
 		865C9AD11D79DFF400345AF9 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 865C9AB71D79DFF400345AF9 /* utils.c */; };
 		865C9AD21D79DFF400345AF9 /* utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 865C9AB81D79DFF400345AF9 /* utils.h */; };
+		866F1CEC2AA8E15300A55CAC /* SketchModelTestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866F1CEB2AA8E15300A55CAC /* SketchModelTestKit.framework */; };
 		86A35A091D79BE80002DCEC2 /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359F91D79BE80002DCEC2 /* alpha.c */; };
 		86A35A0A1D79BE80002DCEC2 /* alphai.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A359FA1D79BE80002DCEC2 /* alphai.h */; };
 		86A35A0B1D79BE80002DCEC2 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A359FB1D79BE80002DCEC2 /* buffer.c */; };
@@ -267,6 +267,7 @@
 		865C9AB81D79DFF400345AF9 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = src/utils/utils.h; sourceTree = SOURCE_ROOT; };
 		866BE8261DA2B7C5004BD6D8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		866BE8281DA2B7CC004BD6D8 /* libMinizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMinizip.a; path = "../../../../../Library/Developer/Xcode/DerivedData/Sketch-fjbukfedngjgmzaszlpcioezcwks/Build/Products/Release/libMinizip.a"; sourceTree = "<group>"; };
+		866F1CEB2AA8E15300A55CAC /* SketchModelTestKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SketchModelTestKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A359F91D79BE80002DCEC2 /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha.c; path = src/dec/alpha.c; sourceTree = SOURCE_ROOT; };
 		86A359FA1D79BE80002DCEC2 /* alphai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alphai.h; path = src/dec/alphai.h; sourceTree = SOURCE_ROOT; };
 		86A359FB1D79BE80002DCEC2 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = buffer.c; path = src/dec/buffer.c; sourceTree = SOURCE_ROOT; };
@@ -347,9 +348,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866F1CEC2AA8E15300A55CAC /* SketchModelTestKit.framework in Frameworks */,
 				86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */,
 				9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */,
-				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
 				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
 				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
 				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
@@ -431,6 +432,7 @@
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				866F1CEB2AA8E15300A55CAC /* SketchModelTestKit.framework */,
 				86F54FDB29F00A1200146B44 /* Security.framework */,
 				9DD5FFDE29E5DC940068601F /* Cocoa.framework */,
 				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
@@ -819,7 +821,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../ECUnitTests/Extras/package-mac-static-library.sh\"\n";
+			shellScript = "#\"${ECLOGGING_SCRIPT_PATH}/package-mac-static-library.sh\"\n\"$PROJECT_DIR/../../Extras/Scripts/package-mac-static-library.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -2,11 +2,12 @@
 //  Created by Gavin on 05/09/2016.
 //  Copyright © 2016 Bohemian Coding. All rights reserved.
 //
-@import ECUnitTests;
+@import XCTest;
+@import SketchModelTestKit;
 @import WebP;
 @import Chocolat;
 
-@interface NSImageWebPTester : ECTestCase
+@interface NSImageWebPTester : XCTestCase
 
 @end
 
@@ -27,9 +28,8 @@
   NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
 
   NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
-  
-  BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
-  XCTAssertTrue( imagesMatch );
+
+  [self compareImage:rep toReferenceImage:expectedBitmap testName:@"testImageLoaded"];
 }
 
 - (void)testBadURL {
@@ -63,8 +63,7 @@
   NSBitmapImageRep *expectedBitmap = [expectedImage firstBitmapImageRepOrCreateIfNecessary];
   NSBitmapImageRep *rep = [image firstBitmapImageRepOrCreateIfNecessary];
   
-  BOOL imagesMatch = [self image:rep matchesReferenceImage:expectedBitmap properties:@{}];
-  XCTAssertTrue( imagesMatch );
+  [self compareImage:rep toReferenceImage:expectedBitmap testName:@"testPremultipliedAlpha"];
 }
 
 
