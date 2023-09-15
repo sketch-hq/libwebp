@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278CAA5821DF659F0091CB78 /* BCFoundation.framework */; };
-		4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368984621A30F67007BD228 /* Chocolat.framework */; };
-		439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439B2C1524BF3D57008B430F /* ECUnitTests.framework */; };
 		5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B42DE981A63D9AD0025C1EA /* WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B42DE7D1A63D1930025C1EA /* libWebP.a */; };
 		863BC20D1D75E12E00726200 /* alpha_processing_mips_dsp_r2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */; };
 		863BC20E1D75E12E00726200 /* alpha_processing_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D21D75E12D00726200 /* alpha_processing_sse2.c */; };
 		863BC20F1D75E12E00726200 /* alpha_processing_sse41.c in Sources */ = {isa = PBXBuildFile; fileRef = 863BC1D31D75E12D00726200 /* alpha_processing_sse41.c */; };
@@ -114,11 +110,6 @@
 		86A35A161D79BE80002DCEC2 /* vp8li.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A35A061D79BE80002DCEC2 /* vp8li.h */; };
 		86A35A171D79BE80002DCEC2 /* webp.c in Sources */ = {isa = PBXBuildFile; fileRef = 86A35A071D79BE80002DCEC2 /* webp.c */; };
 		86A35A181D79BE80002DCEC2 /* webpi.h in Headers */ = {isa = PBXBuildFile; fileRef = 86A35A081D79BE80002DCEC2 /* webpi.h */; };
-		86DA98D51D7DD1380063A34F /* NSImage+WebP.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DA98D31D7DD1380063A34F /* NSImage+WebP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86DA98D61D7DD1380063A34F /* NSImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DA98D41D7DD1380063A34F /* NSImage+WebP.m */; };
-		86DA98D81D7DD3300063A34F /* NSImageWebPTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */; };
-		86DA98DA1D7DD4420063A34F /* Documents in Resources */ = {isa = PBXBuildFile; fileRef = 86DA98D91D7DD4420063A34F /* Documents */; };
-		86DA98E41D7DDC0A0063A34F /* Reference in Resources */ = {isa = PBXBuildFile; fileRef = 86DA98E31D7DDC0A0063A34F /* Reference */; };
 		86DD0E251D75C1F2008D5BB4 /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E091D75C1F2008D5BB4 /* alpha.c */; };
 		86DD0E261D75C1F2008D5BB4 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E0A1D75C1F2008D5BB4 /* analysis.c */; };
 		86DD0E271D75C1F2008D5BB4 /* backward_references.c in Sources */ = {isa = PBXBuildFile; fileRef = 86DD0E0B1D75C1F2008D5BB4 /* backward_references.c */; };
@@ -162,22 +153,16 @@
 		86DD0F391D75C2CD008D5BB4 /* mux.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F321D75C2CD008D5BB4 /* mux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3A1D75C2CD008D5BB4 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F331D75C2CD008D5BB4 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86DD0F3C1D75C340008D5BB4 /* webp.pch in Headers */ = {isa = PBXBuildFile; fileRef = 86DD0F3B1D75C340008D5BB4 /* webp.pch */; };
-		86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86F54FDB29F00A1200146B44 /* Security.framework */; };
-		9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD5FFDE29E5DC940068601F /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22D0BF0E1AFA4EEE00AE043D /* WebPDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPDebug.xcconfig; sourceTree = "<group>"; };
 		22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPRelease.xcconfig; sourceTree = "<group>"; };
-		22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsDebug.xcconfig; sourceTree = "<group>"; };
-		22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPTestsRelease.xcconfig; sourceTree = "<group>"; };
 		278CAA5821DF659F0091CB78 /* BCFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368984621A30F67007BD228 /* Chocolat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chocolat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		439B2C1524BF3D57008B430F /* ECUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ECUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE7D1A63D1930025C1EA /* libWebP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B42DE881A63D1930025C1EA /* WebPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE981A63D9AD0025C1EA /* WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebP.h; path = Source/WebP.h; sourceTree = "<group>"; };
-		5B42DEA21A63DBDA0025C1EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		5B42DF261A63F3400025C1EA /* WebP.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = WebP.modulemap; path = Source/WebP.modulemap; sourceTree = "<group>"; };
 		863BC1D11D75E12D00726200 /* alpha_processing_mips_dsp_r2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha_processing_mips_dsp_r2.c; path = src/dsp/alpha_processing_mips_dsp_r2.c; sourceTree = SOURCE_ROOT; };
 		863BC1D21D75E12D00726200 /* alpha_processing_sse2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha_processing_sse2.c; path = src/dsp/alpha_processing_sse2.c; sourceTree = SOURCE_ROOT; };
@@ -283,11 +268,6 @@
 		86A35A061D79BE80002DCEC2 /* vp8li.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vp8li.h; path = src/dec/vp8li.h; sourceTree = SOURCE_ROOT; };
 		86A35A071D79BE80002DCEC2 /* webp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = webp.c; path = src/dec/webp.c; sourceTree = SOURCE_ROOT; };
 		86A35A081D79BE80002DCEC2 /* webpi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = webpi.h; path = src/dec/webpi.h; sourceTree = SOURCE_ROOT; };
-		86DA98D31D7DD1380063A34F /* NSImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+WebP.h"; sourceTree = "<group>"; };
-		86DA98D41D7DD1380063A34F /* NSImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+WebP.m"; sourceTree = "<group>"; };
-		86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSImageWebPTester.m; sourceTree = "<group>"; };
-		86DA98D91D7DD4420063A34F /* Documents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documents; sourceTree = "<group>"; };
-		86DA98E31D7DDC0A0063A34F /* Reference */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Reference; sourceTree = "<group>"; };
 		86DD0E091D75C1F2008D5BB4 /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alpha.c; path = src/enc/alpha.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0A1D75C1F2008D5BB4 /* analysis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = analysis.c; path = src/enc/analysis.c; sourceTree = SOURCE_ROOT; };
 		86DD0E0B1D75C1F2008D5BB4 /* backward_references.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = backward_references.c; path = src/enc/backward_references.c; sourceTree = SOURCE_ROOT; };
@@ -343,19 +323,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B42DE851A63D1930025C1EA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86F54FDC29F00A1200146B44 /* Security.framework in Frameworks */,
-				9DD5FFDF29E5DC940068601F /* Cocoa.framework in Frameworks */,
-				439B2C1624BF3D57008B430F /* ECUnitTests.framework in Frameworks */,
-				278CAA5921DF659F0091CB78 /* BCFoundation.framework in Frameworks */,
-				4368984721A30F67007BD228 /* Chocolat.framework in Frameworks */,
-				5B42DF2A1A6412CD0025C1EA /* libWebP.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -374,7 +341,6 @@
 				5B42DE981A63D9AD0025C1EA /* WebP.h */,
 				5B42DF261A63F3400025C1EA /* WebP.modulemap */,
 				5B42DE971A63D9AD0025C1EA /* Source */,
-				5B42DE9E1A63DB3D0025C1EA /* Tests */,
 				5B42DE7E1A63D1930025C1EA /* Products */,
 				5B42DEAF1A63E44F0025C1EA /* Frameworks */,
 			);
@@ -386,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				5B42DE7D1A63D1930025C1EA /* libWebP.a */,
-				5B42DE881A63D1930025C1EA /* WebPTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -394,7 +359,6 @@
 		5B42DE971A63D9AD0025C1EA /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				86DA98D21D7DD1040063A34F /* Bohemian */,
 				86DD0E451D75C237008D5BB4 /* dec */,
 				86DD0E441D75C235008D5BB4 /* demux */,
 				86DD0E431D75C233008D5BB4 /* dsp */,
@@ -414,18 +378,6 @@
 				22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */,
 			);
 			name = Configs;
-			sourceTree = "<group>";
-		};
-		5B42DE9E1A63DB3D0025C1EA /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				86DA98D91D7DD4420063A34F /* Documents */,
-				86DA98E31D7DDC0A0063A34F /* Reference */,
-				86DD0F3D1D75C396008D5BB4 /* Supporting Files */,
-				5B42DEA21A63DBDA0025C1EA /* Info.plist */,
-				86DA98D71D7DD3300063A34F /* NSImageWebPTester.m */,
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		5B42DEAF1A63E44F0025C1EA /* Frameworks */ = {
@@ -473,15 +425,6 @@
 				865C9AB81D79DFF400345AF9 /* utils.h */,
 			);
 			name = utils;
-			sourceTree = "<group>";
-		};
-		86DA98D21D7DD1040063A34F /* Bohemian */ = {
-			isa = PBXGroup;
-			children = (
-				86DA98D31D7DD1380063A34F /* NSImage+WebP.h */,
-				86DA98D41D7DD1380063A34F /* NSImage+WebP.m */,
-			);
-			name = Bohemian;
 			sourceTree = "<group>";
 		};
 		86DD0E081D75C1CD008D5BB4 /* enc */ = {
@@ -644,23 +587,6 @@
 			name = webp;
 			sourceTree = "<group>";
 		};
-		86DD0F3D1D75C396008D5BB4 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				86DD0F401D75C3A7008D5BB4 /* Configs */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		86DD0F401D75C3A7008D5BB4 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */,
-				22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */,
-			);
-			name = Configs;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -688,7 +614,6 @@
 				86A35A0C1D79BE80002DCEC2 /* common.h in Headers */,
 				86A35A141D79BE80002DCEC2 /* vp8i.h in Headers */,
 				865C9AC61D79DFF400345AF9 /* huffman.h in Headers */,
-				86DA98D51D7DD1380063A34F /* NSImage+WebP.h in Headers */,
 				86DD0E2D1D75C1F2008D5BB4 /* delta_palettization.h in Headers */,
 				5B42DE991A63D9AD0025C1EA /* WebP.h in Headers */,
 				86DD0E3F1D75C1F2008D5BB4 /* vp8li.h in Headers */,
@@ -736,23 +661,6 @@
 			productReference = 5B42DE7D1A63D1930025C1EA /* libWebP.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		5B42DE871A63D1930025C1EA /* WebPTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5B42DE941A63D1930025C1EA /* Build configuration list for PBXNativeTarget "WebPTests" */;
-			buildPhases = (
-				5B42DE841A63D1930025C1EA /* Sources */,
-				5B42DE851A63D1930025C1EA /* Frameworks */,
-				5B42DE861A63D1930025C1EA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = WebPTests;
-			productName = BCCryptoTests;
-			productReference = 5B42DE881A63D1930025C1EA /* WebPTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -763,11 +671,6 @@
 				ORGANIZATIONNAME = Sketch;
 				TargetAttributes = {
 					5B42DE7C1A63D1930025C1EA = {
-						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 1150;
-						ProvisioningStyle = Automatic;
-					};
-					5B42DE871A63D1930025C1EA = {
 						CreatedOnToolsVersion = 6.1.1;
 						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
@@ -788,22 +691,9 @@
 			projectRoot = "";
 			targets = (
 				5B42DE7C1A63D1930025C1EA /* WebP */,
-				5B42DE871A63D1930025C1EA /* WebPTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		5B42DE861A63D1930025C1EA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86DA98E41D7DDC0A0063A34F /* Reference in Resources */,
-				86DA98DA1D7DD4420063A34F /* Documents in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		863C53921D79D68000ABA846 /* Package Modules */ = {
@@ -915,7 +805,6 @@
 				86DD0E3C1D75C1F2008D5BB4 /* tree.c in Sources */,
 				863BC2241D75E12E00726200 /* enc_mips_dsp_r2.c in Sources */,
 				86DD0E361D75C1F2008D5BB4 /* picture_rescale.c in Sources */,
-				86DA98D61D7DD1380063A34F /* NSImage+WebP.m in Sources */,
 				86A35A131D79BE80002DCEC2 /* vp8.c in Sources */,
 				86DD0E321D75C1F2008D5BB4 /* iterator.c in Sources */,
 				86A35A151D79BE80002DCEC2 /* vp8l.c in Sources */,
@@ -936,14 +825,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B42DE841A63D1930025C1EA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				86DA98D81D7DD3300063A34F /* NSImageWebPTester.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -960,13 +841,6 @@
 			};
 			name = Debug;
 		};
-		430CBB162281CF4E0075360F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22D0BF121AFA4F6200AE043D /* WebPTestsDebug.xcconfig */;
-			buildSettings = {
-			};
-			name = Debug;
-		};
 		430CBB172281CF570075360F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -976,13 +850,6 @@
 		430CBB182281CF570075360F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		430CBB192281CF570075360F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22D0BF131AFA4F6200AE043D /* WebPTestsRelease.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1004,15 +871,6 @@
 			buildConfigurations = (
 				430CBB152281CF4E0075360F /* Debug */,
 				430CBB182281CF570075360F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5B42DE941A63D1930025C1EA /* Build configuration list for PBXNativeTarget "WebPTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				430CBB162281CF4E0075360F /* Debug */,
-				430CBB192281CF570075360F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

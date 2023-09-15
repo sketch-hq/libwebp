@@ -11,4 +11,3 @@
 #import "mux.h"
 #import "types.h"
 
-#import "NSImage+WebP.h"
