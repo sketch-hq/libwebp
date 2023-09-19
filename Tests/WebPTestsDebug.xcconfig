@@ -1,5 +1,0 @@
-#include "WebPTestsRelease.xcconfig"
-#include "../BCFoundation/Configs/BCCoreDebug.xcconfig"
-
-
-
