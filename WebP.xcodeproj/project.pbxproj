@@ -391,7 +391,6 @@
 				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
 				4368984621A30F67007BD228 /* Chocolat.framework */,
 				439B2C1524BF3D57008B430F /* ECUnitTests.framework */,
-				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
 				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
 			);
 			name = Frameworks;
