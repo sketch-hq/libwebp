@@ -16,7 +16,10 @@
 
 #include <stdlib.h>  // free()
 #include <string.h>  // memset()
+
+#ifndef WEBP_WEBP_TYPES_H_
 #include "./types.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {

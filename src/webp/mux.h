@@ -15,7 +15,9 @@
 #ifndef WEBP_WEBP_MUX_H_
 #define WEBP_WEBP_MUX_H_
 
+#ifndef WEBP_WEBP_MUX_TYPES_H_
 #include "./mux_types.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
