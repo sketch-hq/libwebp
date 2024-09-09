@@ -1193,7 +1193,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EEFEBB42C8B46B8009DA0F9 /* WebPSDebug.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 13.0.0;
 			};
 			name = Debug;
 		};
@@ -1207,7 +1206,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EEFEBB52C8B46C8009DA0F9 /* WebPSRelease.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 13.0.0;
 			};
 			name = Release;
 		};
@@ -1215,9 +1213,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22D0BF0E1AFA4EEE00AE043D /* WebPDebug.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				DEVELOPMENT_TEAM = WUGMZZ5K46;
-				MACOSX_DEPLOYMENT_TARGET = 13.0.0;
 			};
 			name = Debug;
 		};
@@ -1225,9 +1220,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				DEVELOPMENT_TEAM = WUGMZZ5K46;
-				MACOSX_DEPLOYMENT_TARGET = 13.0.0;
 			};
 			name = Release;
 		};
