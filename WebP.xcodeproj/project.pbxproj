@@ -1223,6 +1223,26 @@
 			};
 			name = Release;
 		};
+		80FFCF622CD81A3E00D538C5 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Profile;
+		};
+		80FFCF632CD81A3E00D538C5 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EEFEBB52C8B46C8009DA0F9 /* WebPSRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = Profile;
+		};
+		80FFCF642CD81A3E00D538C5 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */;
+			buildSettings = {
+			};
+			name = Profile;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1231,6 +1251,7 @@
 			buildConfigurations = (
 				430CBB142281CF4E0075360F /* Debug */,
 				430CBB172281CF570075360F /* Release */,
+				80FFCF622CD81A3E00D538C5 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1240,6 +1261,7 @@
 			buildConfigurations = (
 				430CBB152281CF4E0075360F /* Debug */,
 				430CBB182281CF570075360F /* Release */,
+				80FFCF632CD81A3E00D538C5 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1249,6 +1271,7 @@
 			buildConfigurations = (
 				6EEFEB202C88D030009DA0F9 /* Debug */,
 				6EEFEB212C88D030009DA0F9 /* Release */,
+				80FFCF642CD81A3E00D538C5 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
