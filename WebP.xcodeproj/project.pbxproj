@@ -306,7 +306,6 @@
 		22D0BF0F1AFA4EEE00AE043D /* WebPRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebPRelease.xcconfig; sourceTree = "<group>"; };
 		278CAA5821DF659F0091CB78 /* BCFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368984621A30F67007BD228 /* Chocolat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Chocolat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		439B2C1524BF3D57008B430F /* ECUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ECUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE7D1A63D1930025C1EA /* libWebPS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWebPS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42DE981A63D9AD0025C1EA /* WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebP.h; path = Source/WebP.h; sourceTree = "<group>"; };
 		5B42DF261A63F3400025C1EA /* WebPS.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = WebPS.modulemap; path = Source/WebPS.modulemap; sourceTree = "<group>"; };
@@ -548,7 +547,6 @@
 				9DD5FFDE29E5DC940068601F /* Cocoa.framework */,
 				278CAA5821DF659F0091CB78 /* BCFoundation.framework */,
 				4368984621A30F67007BD228 /* Chocolat.framework */,
-				439B2C1524BF3D57008B430F /* ECUnitTests.framework */,
 				866BE8281DA2B7CC004BD6D8 /* libMinizip.a */,
 				866BE8261DA2B7C5004BD6D8 /* libz.tbd */,
 			);
