@@ -5,6 +5,7 @@
 #import <WebP/mux_types.h>
 #import <WebP/format_constants.h>
 #import <WebP/encode.h>
+#import <WebP/extras.h>
 #import <WebP/decode.h>
 #import <WebP/demux.h>
 #import <WebP/mux.h>
