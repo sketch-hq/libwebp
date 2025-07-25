@@ -1,6 +1,0 @@
-module WebPS {
-    umbrella header "WebP.h"
-
-    export *
-    module * { export * }
-}

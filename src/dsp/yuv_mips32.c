@@ -12,19 +12,20 @@
 // Author(s):  Djordje Pesut    (djordje.pesut@imgtec.com)
 //             Jovan Zelincevic (jovan.zelincevic@imgtec.com)
 
-#include "./dsp.h"
+#include "src/dsp/dsp.h"
 
 #if defined(WEBP_USE_MIPS32)
 
-#include "./yuv.h"
+#include "src/dsp/yuv.h"
 
 //------------------------------------------------------------------------------
 // simple point-sampling
 
 #define ROW_FUNC(FUNC_NAME, XSTEP, R, G, B, A)                                 \
-static void FUNC_NAME(const uint8_t* y,                                        \
-                      const uint8_t* u, const uint8_t* v,                      \
-                      uint8_t* dst, int len) {                                 \
+static void FUNC_NAME(const uint8_t* WEBP_RESTRICT y,                          \
+                      const uint8_t* WEBP_RESTRICT u,                          \
+                      const uint8_t* WEBP_RESTRICT v,                          \
+                      uint8_t* WEBP_RESTRICT dst, int len) {                   \
   int i, r, g, b;                                                              \
   int temp0, temp1, temp2, temp3, temp4;                                       \
   for (i = 0; i < (len >> 1); i++) {                                           \
@@ -77,10 +78,10 @@ static void FUNC_NAME(const uint8_t* y,                                        \
   }                                                                            \
 }
 
-ROW_FUNC(YuvToRgbRow,      3, 0, 1, 2, 0)
-ROW_FUNC(YuvToRgbaRow,     4, 0, 1, 2, 3)
-ROW_FUNC(YuvToBgrRow,      3, 2, 1, 0, 0)
-ROW_FUNC(YuvToBgraRow,     4, 2, 1, 0, 3)
+ROW_FUNC(YuvToRgbRow_MIPS32,      3, 0, 1, 2, 0)
+ROW_FUNC(YuvToRgbaRow_MIPS32,     4, 0, 1, 2, 3)
+ROW_FUNC(YuvToBgrRow_MIPS32,      3, 2, 1, 0, 0)
+ROW_FUNC(YuvToBgraRow_MIPS32,     4, 2, 1, 0, 3)
 
 #undef ROW_FUNC
 
@@ -90,10 +91,10 @@ ROW_FUNC(YuvToBgraRow,     4, 2, 1, 0, 3)
 extern void WebPInitSamplersMIPS32(void);
 
 WEBP_TSAN_IGNORE_FUNCTION void WebPInitSamplersMIPS32(void) {
-  WebPSamplers[MODE_RGB]  = YuvToRgbRow;
-  WebPSamplers[MODE_RGBA] = YuvToRgbaRow;
-  WebPSamplers[MODE_BGR]  = YuvToBgrRow;
-  WebPSamplers[MODE_BGRA] = YuvToBgraRow;
+  WebPSamplers[MODE_RGB]  = YuvToRgbRow_MIPS32;
+  WebPSamplers[MODE_RGBA] = YuvToRgbaRow_MIPS32;
+  WebPSamplers[MODE_BGR]  = YuvToBgrRow_MIPS32;
+  WebPSamplers[MODE_BGRA] = YuvToBgraRow_MIPS32;
 }
 
 #else  // !WEBP_USE_MIPS32

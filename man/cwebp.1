@@ -1,5 +1,5 @@
 .\"                                      Hey, EMACS: -*- nroff -*-
-.TH CWEBP 1 "June 23, 2016"
+.TH CWEBP 1 "April 10, 2025"
 .SH NAME
 cwebp \- compress an image file to a WebP file
 .SH SYNOPSIS
@@ -13,6 +13,7 @@ command.
 .PP
 \fBcwebp\fP compresses an image using the WebP format.
 Input format can be either PNG, JPEG, TIFF, WebP or raw Y'CbCr samples.
+Note: Animated PNG and WebP files are not supported.
 .SH OPTIONS
 The basic options are:
 .TP
@@ -41,10 +42,12 @@ the invisible pixel values (R/G/B or Y/U/V) will be preserved only if the
 \-exact option is used.
 .TP
 .BI \-near_lossless " int
-Use near\-lossless image preprocessing. This option adjusts pixel values
-to help compressibility, but has minimal impact on the visual quality.
-It triggers lossless compression mode automatically.
-Range is 0 (maximum preprocessing) to 100 (no preprocessing, the default).
+Specify the level of near\-lossless image preprocessing. This option adjusts
+pixel values to help compressibility, but has minimal impact on the visual
+quality. It triggers lossless compression mode automatically. The range is 0
+(maximum preprocessing) to 100 (no preprocessing, the default). The typical
+value is around 60. Note that lossy with \fB\-q 100\fP can at times yield
+better results.
 .TP
 .BI \-q " float
 Specify the compression factor for RGB channels between 0 and 100. The default
@@ -87,19 +90,28 @@ additional encoding possibilities and decide on the quality gain.
 Lower value can result in faster processing time at the expense of
 larger file size and lower compression quality.
 .TP
-.BI \-resize " width height
-Resize the source to a rectangle with size \fBwidth\fP x \fBheight\fP.
-If either (but not both) of the \fBwidth\fP or \fBheight\fP parameters is 0,
-the value will be calculated preserving the aspect\-ratio.
-.TP
 .BI \-crop " x_position y_position width height
 Crop the source to a rectangle with top\-left corner at coordinates
 (\fBx_position\fP, \fBy_position\fP) and size \fBwidth\fP x \fBheight\fP.
 This cropping area must be fully contained within the source rectangle.
+Note: the cropping is applied \fIbefore\fP any scaling.
+.TP
+.BI \-resize " width height
+Resize the source to a rectangle with size \fBwidth\fP x \fBheight\fP.
+If either (but not both) of the \fBwidth\fP or \fBheight\fP parameters is 0,
+the value will be calculated preserving the aspect\-ratio. Note: scaling
+is applied \fIafter\fP cropping.
+.TP
+.BI \-resize_mode " string
+Specify the behavior of the \fB\-resize\fP option. Possible values are:
+\fBdown_only\fP, \fBup_only\fP, \fBalways\fP (default). \fBdown_only\fP will
+use the values specified by \fB\-resize\fP if \fIeither\fP the input width or
+height are larger than the given dimensions. Similarly, \fBup_only\fP will only
+resize if \fIeither\fP the input width or height are smaller than the given
+dimensions.
 .TP
 .B \-mt
-Use multi\-threading for encoding, if possible. This option is only effective
-when using lossy compression on a source with a transparency channel.
+Use multi\-threading for encoding, if possible.
 .TP
 .B \-low_memory
 Reduce memory usage of lossy encoding by saving four times the compressed
@@ -117,21 +129,30 @@ or without alpha).
 .TP
 .BI \-size " int
 Specify a target size (in bytes) to try and reach for the compressed output.
-Compressor will make several pass of partial encoding in order to get as
+The compressor will make several passes of partial encoding in order to get as
 close as possible to this target. If both \fB\-size\fP and \fB\-psnr\fP
-as used, \fB\-size\fP value will prevail.
+are used, \fB\-size\fP value will prevail.
 .TP
 .BI \-psnr " float
 Specify a target PSNR (in dB) to try and reach for the compressed output.
-Compressor will make several pass of partial encoding in order to get as
+The compressor will make several passes of partial encoding in order to get as
 close as possible to this target. If both \fB\-size\fP and \fB\-psnr\fP
-as used, \fB\-size\fP value will prevail.
+are used, \fB\-size\fP value will prevail.
 .TP
 .BI \-pass " int
 Set a maximum number of passes to use during the dichotomy used by
 options \fB\-size\fP or \fB\-psnr\fP. Maximum value is 10, default is 1.
 If options \fB\-size\fP or \fB\-psnr\fP were used, but \fB\-pass\fP wasn't
-specified, a default value of '6' passes will be used.
+specified, a default value of '6' passes will be used. If \fB\-pass\fP is
+specified, but neither \fB-size\fP nor \fB-psnr\fP are, a target PSNR of 40dB
+will be used.
+.TP
+.BI \-qrange " int int
+Specifies the permissible interval for the quality factor. This is particularly
+useful when using multi-pass (\fB\-size\fP or \fB\-psnr\fP options).
+Default is 0 100.
+If the quality factor is outside this range, it will be clamped.
+If the minimum value must be less or equal to the maximum one.
 .TP
 .B \-af
 Turns auto\-filter on. This algorithm will spend additional time optimizing
@@ -166,12 +187,16 @@ Use strong filtering (if filtering is being used thanks to the
 Disable strong filtering (if filtering is being used thanks to the
 \fB\-f\fP option) and use simple filtering instead.
 .TP
+.B \-sharp_yuv
+Use more accurate and sharper RGB->YUV conversion. Note that this process is
+slower than the default 'fast' RGB->YUV conversion.
+.TP
 .BI \-sns " int
 Specify the amplitude of the spatial noise shaping. Spatial noise shaping
 (or \fBsns\fP for short) refers to a general collection of built\-in algorithms
 used to decide which area of the picture should use relatively less bits,
 and where else to better transfer these bits. The possible range goes from
-0 (algorithm is off) to 100 (the maximal effect). The default value is 80.
+0 (algorithm is off) to 100 (the maximal effect). The default value is 50.
 .TP
 .BI \-segments " int
 Change the number of partitions to use during the segmentation of the
@@ -187,7 +212,8 @@ In the VP8 format, the so\-called control partition has a limit of 512k and
 is used to store the following information: whether the macroblock is skipped,
 which segment it belongs to, whether it is coded as intra 4x4 or intra 16x16
 mode, and finally the prediction modes to use for each of the sub\-blocks.
-For a very large image, 512k only leaves room to few bits per 16x16 macroblock.
+For a very large image, 512k only leaves room for a few bits per 16x16
+macroblock.
 The absolute minimum is 4 bits per macroblock. Skip, segment, and mode
 information can use up almost all these 4 bits (although the case is unlikely),
 which is problematic for very large images. The partition_limit factor controls
@@ -196,7 +222,8 @@ useful in case the 512k limit is reached and the following message is displayed:
 \fIError code: 6 (PARTITION0_OVERFLOW: Partition #0 is too big to fit 512k)\fP.
 If using \fB\-partition_limit\fP is not enough to meet the 512k constraint, one
 should use less segments in order to save more header bits per macroblock.
-See the \fB\-segments\fP option.
+See the \fB\-segments\fP option. Note the \fB-m\fP and \fB-q\fP options also
+influence the encoder's decisions and ability to hit this limit.
 
 .SS LOGGING OPTIONS
 These options control the level of output:
@@ -209,7 +236,7 @@ Compute and report average PSNR (Peak\-Signal\-To\-Noise ratio).
 .TP
 .B \-print_ssim
 Compute and report average SSIM (structural similarity
-metric, see http://en.wikipedia.org/wiki/SSIM for additional details).
+metric, see https://en.wikipedia.org/wiki/SSIM for additional details).
 .TP
 .B \-print_lsim
 Compute and report local similarity metric (sum of lowest error amongst the
@@ -222,7 +249,7 @@ Report encoding progress in percent.
 Do not print anything.
 .TP
 .B \-short
-Only print brief information (output file size and PSNR) for testing purpose.
+Only print brief information (output file size and PSNR) for testing purposes.
 .TP
 .BI \-map " int
 Output additional ASCII\-map of encoding information. Possible map values
@@ -280,12 +307,12 @@ Note: each input format may not support all combinations.
 .B \-noasm
 Disable all assembly optimizations.
 
-.SH BUGS
-Please report all bugs to the issue tracker:
-https://bugs.chromium.org/p/webp
-.br
-Patches welcome! See this page to get started:
-http://www.webmproject.org/code/contribute/submitting\-patches/
+.SH EXIT STATUS
+If there were no problems during execution, \fBcwebp\fP exits with the value of
+the C constant \fBEXIT_SUCCESS\fP. This is usually zero.
+.PP
+If an error occurs, \fBcwebp\fP exits with the value of the C constant
+\fBEXIT_FAILURE\fP. This is usually one.
 
 .SH EXAMPLES
 cwebp \-q 50 -lossless picture.png \-o picture_lossless.webp
@@ -305,9 +332,16 @@ https://chromium.googlesource.com/webm/libwebp
 This manual page was written by Pascal Massimino <pascal.massimino@gmail.com>,
 for the Debian project (and may be used by others).
 
+.SH REPORTING BUGS
+Please report all bugs to the issue tracker:
+https://issues.webmproject.org
+.br
+Patches welcome! See this page to get started:
+https://www.webmproject.org/code/contribute/submitting\-patches/
+
 .SH SEE ALSO
 .BR dwebp (1),
 .BR gif2webp (1)
 .br
-Please refer to http://developers.google.com/speed/webp/ for additional
+Please refer to https://developers.google.com/speed/webp/ for additional
 information.

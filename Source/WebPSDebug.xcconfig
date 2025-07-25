@@ -1,4 +1,0 @@
-#include "WebPRelease.xcconfig"
-#include "../BCFoundation/Configs/BCCoreDebug.xcconfig"
-
-

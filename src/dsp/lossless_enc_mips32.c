@@ -12,8 +12,9 @@
 // Author(s):  Djordje Pesut    (djordje.pesut@imgtec.com)
 //             Jovan Zelincevic (jovan.zelincevic@imgtec.com)
 
-#include "./dsp.h"
-#include "./lossless.h"
+#include "src/dsp/dsp.h"
+#include "src/dsp/lossless.h"
+#include "src/dsp/lossless_common.h"
 
 #if defined(WEBP_USE_MIPS32)
 
@@ -22,12 +23,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-static float FastSLog2Slow(uint32_t v) {
+static uint64_t FastSLog2Slow_MIPS32(uint32_t v) {
   assert(v >= LOG_LOOKUP_IDX_MAX);
   if (v < APPROX_LOG_WITH_CORRECTION_MAX) {
-    uint32_t log_cnt, y, correction;
+    uint32_t log_cnt, y;
+    uint64_t correction;
     const int c24 = 24;
-    const float v_f = (float)v;
     uint32_t temp;
 
     // Xf = 256 = 2^8
@@ -48,22 +49,23 @@ static float FastSLog2Slow(uint32_t v) {
     // log2(Xf) = log2(floor(Xf)) + log2(1 + (v % y) / v)
     // The correction factor: log(1 + d) ~ d; for very small d values, so
     // log2(1 + (v % y) / v) ~ LOG_2_RECIPROCAL * (v % y)/v
-    // LOG_2_RECIPROCAL ~ 23/16
 
     // (v % y) = (v % 2^log_cnt) = v & (2^log_cnt - 1)
-    correction = (23 * (v & (y - 1))) >> 4;
-    return v_f * (kLog2Table[temp] + log_cnt) + correction;
+    correction = LOG_2_RECIPROCAL_FIXED * (v & (y - 1));
+    return (uint64_t)v * (kLog2Table[temp] +
+                          ((uint64_t)log_cnt << LOG_2_PRECISION_BITS)) +
+           correction;
   } else {
-    return (float)(LOG_2_RECIPROCAL * v * log((double)v));
+    return (uint64_t)(LOG_2_RECIPROCAL_FIXED_DOUBLE * v * log((double)v) + .5);
   }
 }
 
-static float FastLog2Slow(uint32_t v) {
+static uint32_t FastLog2Slow_MIPS32(uint32_t v) {
   assert(v >= LOG_LOOKUP_IDX_MAX);
   if (v < APPROX_LOG_WITH_CORRECTION_MAX) {
     uint32_t log_cnt, y;
     const int c24 = 24;
-    double log_2;
+    uint32_t log_2;
     uint32_t temp;
 
     __asm__ volatile(
@@ -77,17 +79,16 @@ static float FastLog2Slow(uint32_t v) {
       : [c24]"r"(c24), [v]"r"(v)
     );
 
-    log_2 = kLog2Table[temp] + log_cnt;
+    log_2 = kLog2Table[temp] + (log_cnt << LOG_2_PRECISION_BITS);
     if (v >= APPROX_LOG_MAX) {
       // Since the division is still expensive, add this correction factor only
       // for large values of 'v'.
-
-      const uint32_t correction = (23 * (v & (y - 1))) >> 4;
-      log_2 += (double)correction / v;
+      const uint64_t correction = LOG_2_RECIPROCAL_FIXED * (v & (y - 1));
+      log_2 += (uint32_t)DivRound(correction, v);
     }
-    return (float)log_2;
+    return log_2;
   } else {
-    return (float)(LOG_2_RECIPROCAL * log((double)v));
+    return (uint32_t)(LOG_2_RECIPROCAL_FIXED_DOUBLE * log((double)v) + .5);
   }
 }
 
@@ -102,8 +103,8 @@ static float FastLog2Slow(uint32_t v) {
 //     cost += i * *(pop + 1);
 //     pop += 2;
 //   }
-//   return (double)cost;
-static double ExtraCost(const uint32_t* const population, int length) {
+//   return cost;
+static uint32_t ExtraCost_MIPS32(const uint32_t* const population, int length) {
   int i, temp0, temp1;
   const uint32_t* pop = &population[4];
   const uint32_t* const LoopEnd = &population[length];
@@ -129,60 +130,7 @@ static double ExtraCost(const uint32_t* const population, int length) {
     : "memory", "hi", "lo"
   );
 
-  return (double)((int64_t)temp0 << 32 | temp1);
-}
-
-// C version of this function:
-//   int i = 0;
-//   int64_t cost = 0;
-//   const uint32_t* pX = &X[4];
-//   const uint32_t* pY = &Y[4];
-//   const uint32_t* LoopEnd = &X[length];
-//   while (pX != LoopEnd) {
-//     const uint32_t xy0 = *pX + *pY;
-//     const uint32_t xy1 = *(pX + 1) + *(pY + 1);
-//     ++i;
-//     cost += i * xy0;
-//     cost += i * xy1;
-//     pX += 2;
-//     pY += 2;
-//   }
-//   return (double)cost;
-static double ExtraCostCombined(const uint32_t* const X,
-                                const uint32_t* const Y, int length) {
-  int i, temp0, temp1, temp2, temp3;
-  const uint32_t* pX = &X[4];
-  const uint32_t* pY = &Y[4];
-  const uint32_t* const LoopEnd = &X[length];
-
-  __asm__ volatile(
-    "mult   $zero,    $zero                  \n\t"
-    "xor    %[i],     %[i],       %[i]       \n\t"
-    "beq    %[pX],    %[LoopEnd], 2f         \n\t"
-  "1:                                        \n\t"
-    "lw     %[temp0], 0(%[pX])               \n\t"
-    "lw     %[temp1], 0(%[pY])               \n\t"
-    "lw     %[temp2], 4(%[pX])               \n\t"
-    "lw     %[temp3], 4(%[pY])               \n\t"
-    "addiu  %[i],     %[i],       1          \n\t"
-    "addu   %[temp0], %[temp0],   %[temp1]   \n\t"
-    "addu   %[temp2], %[temp2],   %[temp3]   \n\t"
-    "addiu  %[pX],    %[pX],      8          \n\t"
-    "addiu  %[pY],    %[pY],      8          \n\t"
-    "madd   %[i],     %[temp0]               \n\t"
-    "madd   %[i],     %[temp2]               \n\t"
-    "bne    %[pX],    %[LoopEnd], 1b         \n\t"
-  "2:                                        \n\t"
-    "mfhi   %[temp0]                         \n\t"
-    "mflo   %[temp1]                         \n\t"
-    : [temp0]"=&r"(temp0), [temp1]"=&r"(temp1),
-      [temp2]"=&r"(temp2), [temp3]"=&r"(temp3),
-      [i]"=&r"(i), [pX]"+r"(pX), [pY]"+r"(pY)
-    : [LoopEnd]"r"(LoopEnd)
-    : "memory", "hi", "lo"
-  );
-
-  return (double)((int64_t)temp0 << 32 | temp1);
+  return ((int64_t)temp0 << 32 | temp1);
 }
 
 #define HUFFMAN_COST_PASS                                 \
@@ -214,8 +162,10 @@ static double ExtraCostCombined(const uint32_t* const X,
 
 // Returns the various RLE counts
 static WEBP_INLINE void GetEntropyUnrefinedHelper(
-    uint32_t val, int i, uint32_t* const val_prev, int* const i_prev,
-    VP8LBitEntropy* const bit_entropy, VP8LStreaks* const stats) {
+    uint32_t val, int i, uint32_t* WEBP_RESTRICT const val_prev,
+    int* WEBP_RESTRICT const i_prev,
+    VP8LBitEntropy* WEBP_RESTRICT const bit_entropy,
+    VP8LStreaks* WEBP_RESTRICT const stats) {
   int* const pstreaks = &stats->streaks[0][0];
   int* const pcnts = &stats->counts[0];
   int temp0, temp1, temp2, temp3;
@@ -226,7 +176,7 @@ static WEBP_INLINE void GetEntropyUnrefinedHelper(
     bit_entropy->sum += (*val_prev) * streak;
     bit_entropy->nonzeros += streak;
     bit_entropy->nonzero_code = *i_prev;
-    bit_entropy->entropy -= VP8LFastSLog2(*val_prev) * streak;
+    bit_entropy->entropy += VP8LFastSLog2(*val_prev) * streak;
     if (bit_entropy->max_val < *val_prev) {
       bit_entropy->max_val = *val_prev;
     }
@@ -240,6 +190,50 @@ static WEBP_INLINE void GetEntropyUnrefinedHelper(
   *i_prev = i;
 }
 
+static void GetEntropyUnrefined_MIPS32(
+    const uint32_t X[], int length,
+    VP8LBitEntropy* WEBP_RESTRICT const bit_entropy,
+    VP8LStreaks* WEBP_RESTRICT const stats) {
+  int i;
+  int i_prev = 0;
+  uint32_t x_prev = X[0];
+
+  memset(stats, 0, sizeof(*stats));
+  VP8LBitEntropyInit(bit_entropy);
+
+  for (i = 1; i < length; ++i) {
+    const uint32_t x = X[i];
+    if (x != x_prev) {
+      GetEntropyUnrefinedHelper(x, i, &x_prev, &i_prev, bit_entropy, stats);
+    }
+  }
+  GetEntropyUnrefinedHelper(0, i, &x_prev, &i_prev, bit_entropy, stats);
+
+  bit_entropy->entropy = VP8LFastSLog2(bit_entropy->sum) - bit_entropy->entropy;
+}
+
+static void GetCombinedEntropyUnrefined_MIPS32(
+    const uint32_t X[], const uint32_t Y[], int length,
+    VP8LBitEntropy* WEBP_RESTRICT const entropy,
+    VP8LStreaks* WEBP_RESTRICT const stats) {
+  int i = 1;
+  int i_prev = 0;
+  uint32_t xy_prev = X[0] + Y[0];
+
+  memset(stats, 0, sizeof(*stats));
+  VP8LBitEntropyInit(entropy);
+
+  for (i = 1; i < length; ++i) {
+    const uint32_t xy = X[i] + Y[i];
+    if (xy != xy_prev) {
+      GetEntropyUnrefinedHelper(xy, i, &xy_prev, &i_prev, entropy, stats);
+    }
+  }
+  GetEntropyUnrefinedHelper(0, i, &xy_prev, &i_prev, entropy, stats);
+
+  entropy->entropy = VP8LFastSLog2(entropy->sum) - entropy->entropy;
+}
+
 #define ASM_START                                       \
   __asm__ volatile(                                     \
     ".set   push                            \n\t"       \
@@ -251,7 +245,7 @@ static WEBP_INLINE void GetEntropyUnrefinedHelper(
 // A..D - offsets
 // E - temp variable to tell macro
 //     if pointer should be incremented
-// literal_ and successive histograms could be unaligned
+// 'literal' and successive histograms could be unaligned
 // so we must use ulw and usw
 #define ADD_TO_OUT(A, B, C, D, E, P0, P1, P2)           \
     "ulw    %[temp0], " #A "(%[" #P0 "])    \n\t"       \
@@ -299,65 +293,31 @@ static WEBP_INLINE void GetEntropyUnrefinedHelper(
     ASM_END_COMMON_0                                    \
     ASM_END_COMMON_1
 
-#define ADD_VECTOR(A, B, OUT, SIZE, EXTRA_SIZE)  do {   \
-  const uint32_t* pa = (const uint32_t*)(A);            \
-  const uint32_t* pb = (const uint32_t*)(B);            \
-  uint32_t* pout = (uint32_t*)(OUT);                    \
-  const uint32_t* const LoopEnd = pa + (SIZE);          \
-  assert((SIZE) % 4 == 0);                              \
-  ASM_START                                             \
-  ADD_TO_OUT(0, 4, 8, 12, 1, pa, pb, pout)              \
-  ASM_END_0                                             \
-  if ((EXTRA_SIZE) > 0) {                               \
-    const int last = (EXTRA_SIZE);                      \
-    int i;                                              \
-    for (i = 0; i < last; ++i) pout[i] = pa[i] + pb[i]; \
-  }                                                     \
-} while (0)
-
-#define ADD_VECTOR_EQ(A, OUT, SIZE, EXTRA_SIZE)  do {   \
-  const uint32_t* pa = (const uint32_t*)(A);            \
-  uint32_t* pout = (uint32_t*)(OUT);                    \
-  const uint32_t* const LoopEnd = pa + (SIZE);          \
-  assert((SIZE) % 4 == 0);                              \
-  ASM_START                                             \
-  ADD_TO_OUT(0, 4, 8, 12, 0, pa, pout, pout)            \
-  ASM_END_1                                             \
-  if ((EXTRA_SIZE) > 0) {                               \
-    const int last = (EXTRA_SIZE);                      \
-    int i;                                              \
-    for (i = 0; i < last; ++i) pout[i] += pa[i];        \
-  }                                                     \
-} while (0)
-
-static void HistogramAdd(const VP8LHistogram* const a,
-                         const VP8LHistogram* const b,
-                         VP8LHistogram* const out) {
+static void AddVector_MIPS32(const uint32_t* WEBP_RESTRICT pa,
+                             const uint32_t* WEBP_RESTRICT pb,
+                             uint32_t* WEBP_RESTRICT pout, int size) {
   uint32_t temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7;
-  const int extra_cache_size = VP8LHistogramNumCodes(a->palette_code_bits_)
-                             - (NUM_LITERAL_CODES + NUM_LENGTH_CODES);
-  assert(a->palette_code_bits_ == b->palette_code_bits_);
-
-  if (b != out) {
-    ADD_VECTOR(a->literal_, b->literal_, out->literal_,
-               NUM_LITERAL_CODES + NUM_LENGTH_CODES, extra_cache_size);
-    ADD_VECTOR(a->distance_, b->distance_, out->distance_,
-               NUM_DISTANCE_CODES, 0);
-    ADD_VECTOR(a->red_, b->red_, out->red_, NUM_LITERAL_CODES, 0);
-    ADD_VECTOR(a->blue_, b->blue_, out->blue_, NUM_LITERAL_CODES, 0);
-    ADD_VECTOR(a->alpha_, b->alpha_, out->alpha_, NUM_LITERAL_CODES, 0);
-  } else {
-    ADD_VECTOR_EQ(a->literal_, out->literal_,
-                  NUM_LITERAL_CODES + NUM_LENGTH_CODES, extra_cache_size);
-    ADD_VECTOR_EQ(a->distance_, out->distance_, NUM_DISTANCE_CODES, 0);
-    ADD_VECTOR_EQ(a->red_, out->red_, NUM_LITERAL_CODES, 0);
-    ADD_VECTOR_EQ(a->blue_, out->blue_, NUM_LITERAL_CODES, 0);
-    ADD_VECTOR_EQ(a->alpha_, out->alpha_, NUM_LITERAL_CODES, 0);
-  }
+  const int end = ((size) / 4) * 4;
+  const uint32_t* const LoopEnd = pa + end;
+  int i;
+  ASM_START
+  ADD_TO_OUT(0, 4, 8, 12, 1, pa, pb, pout)
+  ASM_END_0
+  for (i = 0; i < size - end; ++i) pout[i] = pa[i] + pb[i];
 }
 
-#undef ADD_VECTOR_EQ
-#undef ADD_VECTOR
+static void AddVectorEq_MIPS32(const uint32_t* WEBP_RESTRICT pa,
+                               uint32_t* WEBP_RESTRICT pout, int size) {
+  uint32_t temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7;
+  const int end = ((size) / 4) * 4;
+  const uint32_t* const LoopEnd = pa + end;
+  int i;
+  ASM_START
+  ADD_TO_OUT(0, 4, 8, 12, 0, pa, pout, pout)
+  ASM_END_1
+  for (i = 0; i < size - end; ++i) pout[i] += pa[i];
+}
+
 #undef ASM_END_1
 #undef ASM_END_0
 #undef ASM_END_COMMON_1
@@ -371,12 +331,13 @@ static void HistogramAdd(const VP8LHistogram* const a,
 extern void VP8LEncDspInitMIPS32(void);
 
 WEBP_TSAN_IGNORE_FUNCTION void VP8LEncDspInitMIPS32(void) {
-  VP8LFastSLog2Slow = FastSLog2Slow;
-  VP8LFastLog2Slow = FastLog2Slow;
-  VP8LExtraCost = ExtraCost;
-  VP8LExtraCostCombined = ExtraCostCombined;
-  VP8LGetEntropyUnrefinedHelper = GetEntropyUnrefinedHelper;
-  VP8LHistogramAdd = HistogramAdd;
+  VP8LFastSLog2Slow = FastSLog2Slow_MIPS32;
+  VP8LFastLog2Slow = FastLog2Slow_MIPS32;
+  VP8LExtraCost = ExtraCost_MIPS32;
+  VP8LGetEntropyUnrefined = GetEntropyUnrefined_MIPS32;
+  VP8LGetCombinedEntropyUnrefined = GetCombinedEntropyUnrefined_MIPS32;
+  VP8LAddVector = AddVector_MIPS32;
+  VP8LAddVectorEq = AddVectorEq_MIPS32;
 }
 
 #else  // !WEBP_USE_MIPS32

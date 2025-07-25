@@ -11,7 +11,7 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
-#include "./dsp.h"
+#include "src/dsp/dsp.h"
 
 #if defined(WEBP_USE_SSE2)
 
@@ -20,20 +20,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "src/dsp/cpu.h"
+#include "src/webp/types.h"
+
 //------------------------------------------------------------------------------
 // Helpful macro.
 
-# define SANITY_CHECK(in, out)                                                 \
-  assert(in != NULL);                                                          \
-  assert(out != NULL);                                                         \
-  assert(width > 0);                                                           \
-  assert(height > 0);                                                          \
-  assert(stride >= width);                                                     \
-  assert(row >= 0 && num_rows > 0 && row + num_rows <= height);                \
-  (void)height;  // Silence unused warning.
+#define DCHECK(in, out)                                                        \
+  do {                                                                         \
+    assert((in) != NULL);                                                      \
+    assert((out) != NULL);                                                     \
+    assert((in) != (out));                                                     \
+    assert(width > 0);                                                         \
+    assert(height > 0);                                                        \
+    assert(stride >= width);                                                   \
+  } while (0)
 
-static void PredictLineTop(const uint8_t* src, const uint8_t* pred,
-                           uint8_t* dst, int length) {
+static void PredictLineTop_SSE2(const uint8_t* WEBP_RESTRICT src,
+                                const uint8_t* WEBP_RESTRICT pred,
+                                uint8_t* WEBP_RESTRICT dst, int length) {
   int i;
   const int max_pos = length & ~31;
   assert(length >= 0);
@@ -51,7 +56,8 @@ static void PredictLineTop(const uint8_t* src, const uint8_t* pred,
 }
 
 // Special case for left-based prediction (when preds==dst-1 or preds==src-1).
-static void PredictLineLeft(const uint8_t* src, uint8_t* dst, int length) {
+static void PredictLineLeft_SSE2(const uint8_t* WEBP_RESTRICT src,
+                                 uint8_t* WEBP_RESTRICT dst, int length) {
   int i;
   const int max_pos = length & ~31;
   assert(length >= 0);
@@ -71,31 +77,23 @@ static void PredictLineLeft(const uint8_t* src, uint8_t* dst, int length) {
 //------------------------------------------------------------------------------
 // Horizontal filter.
 
-static WEBP_INLINE void DoHorizontalFilter(const uint8_t* in,
-                                           int width, int height, int stride,
-                                           int row, int num_rows,
-                                           uint8_t* out) {
-  const size_t start_offset = row * stride;
-  const int last_row = row + num_rows;
-  SANITY_CHECK(in, out);
-  in += start_offset;
-  out += start_offset;
+static WEBP_INLINE void DoHorizontalFilter_SSE2(
+    const uint8_t* WEBP_RESTRICT in, int width, int height, int stride,
+    uint8_t* WEBP_RESTRICT out) {
+  int row;
+  DCHECK(in, out);
 
-  if (row == 0) {
-    // Leftmost pixel is the same as input for topmost scanline.
-    out[0] = in[0];
-    PredictLineLeft(in + 1, out + 1, width - 1);
-    row = 1;
-    in += stride;
-    out += stride;
-  }
+  // Leftmost pixel is the same as input for topmost scanline.
+  out[0] = in[0];
+  PredictLineLeft_SSE2(in + 1, out + 1, width - 1);
+  in += stride;
+  out += stride;
 
   // Filter line-by-line.
-  while (row < last_row) {
+  for (row = 1; row < height; ++row) {
     // Leftmost pixel is predicted from above.
     out[0] = in[0] - in[-stride];
-    PredictLineLeft(in + 1, out + 1, width - 1);
-    ++row;
+    PredictLineLeft_SSE2(in + 1, out + 1, width - 1);
     in += stride;
     out += stride;
   }
@@ -104,29 +102,22 @@ static WEBP_INLINE void DoHorizontalFilter(const uint8_t* in,
 //------------------------------------------------------------------------------
 // Vertical filter.
 
-static WEBP_INLINE void DoVerticalFilter(const uint8_t* in,
-                                         int width, int height, int stride,
-                                         int row, int num_rows, uint8_t* out) {
-  const size_t start_offset = row * stride;
-  const int last_row = row + num_rows;
-  SANITY_CHECK(in, out);
-  in += start_offset;
-  out += start_offset;
+static WEBP_INLINE void DoVerticalFilter_SSE2(const uint8_t* WEBP_RESTRICT in,
+                                              int width, int height, int stride,
+                                              uint8_t* WEBP_RESTRICT out) {
+  int row;
+  DCHECK(in, out);
 
-  if (row == 0) {
-    // Very first top-left pixel is copied.
-    out[0] = in[0];
-    // Rest of top scan-line is left-predicted.
-    PredictLineLeft(in + 1, out + 1, width - 1);
-    row = 1;
-    in += stride;
-    out += stride;
-  }
+  // Very first top-left pixel is copied.
+  out[0] = in[0];
+  // Rest of top scan-line is left-predicted.
+  PredictLineLeft_SSE2(in + 1, out + 1, width - 1);
+  in += stride;
+  out += stride;
 
   // Filter line-by-line.
-  while (row < last_row) {
-    PredictLineTop(in, in - stride, out, width);
-    ++row;
+  for (row = 1; row < height; ++row) {
+    PredictLineTop_SSE2(in, in - stride, out, width);
     in += stride;
     out += stride;
   }
@@ -135,14 +126,15 @@ static WEBP_INLINE void DoVerticalFilter(const uint8_t* in,
 //------------------------------------------------------------------------------
 // Gradient filter.
 
-static WEBP_INLINE int GradientPredictorC(uint8_t a, uint8_t b, uint8_t c) {
+static WEBP_INLINE int GradientPredictor_SSE2(uint8_t a, uint8_t b, uint8_t c) {
   const int g = a + b - c;
   return ((g & ~0xff) == 0) ? g : (g < 0) ? 0 : 255;  // clip to 8bit
 }
 
-static void GradientPredictDirect(const uint8_t* const row,
-                                  const uint8_t* const top,
-                                  uint8_t* const out, int length) {
+static void GradientPredictDirect_SSE2(const uint8_t* const row,
+                                       const uint8_t* const top,
+                                       uint8_t* WEBP_RESTRICT const out,
+                                       int length) {
   const int max_pos = length & ~7;
   int i;
   const __m128i zero = _mm_setzero_si128();
@@ -161,66 +153,62 @@ static void GradientPredictDirect(const uint8_t* const row,
     _mm_storel_epi64((__m128i*)(out + i), H);
   }
   for (; i < length; ++i) {
-    out[i] = row[i] - GradientPredictorC(row[i - 1], top[i], top[i - 1]);
+    const int delta = GradientPredictor_SSE2(row[i - 1], top[i], top[i - 1]);
+    out[i] = (uint8_t)(row[i] - delta);
   }
 }
 
-static WEBP_INLINE void DoGradientFilter(const uint8_t* in,
-                                         int width, int height, int stride,
-                                         int row, int num_rows,
-                                         uint8_t* out) {
-  const size_t start_offset = row * stride;
-  const int last_row = row + num_rows;
-  SANITY_CHECK(in, out);
-  in += start_offset;
-  out += start_offset;
+static WEBP_INLINE void DoGradientFilter_SSE2(const uint8_t* WEBP_RESTRICT in,
+                                              int width, int height, int stride,
+                                              uint8_t* WEBP_RESTRICT out) {
+  int row;
+  DCHECK(in, out);
 
   // left prediction for top scan-line
-  if (row == 0) {
-    out[0] = in[0];
-    PredictLineLeft(in + 1, out + 1, width - 1);
-    row = 1;
-    in += stride;
-    out += stride;
-  }
+  out[0] = in[0];
+  PredictLineLeft_SSE2(in + 1, out + 1, width - 1);
+  in += stride;
+  out += stride;
 
   // Filter line-by-line.
-  while (row < last_row) {
-    out[0] = in[0] - in[-stride];
-    GradientPredictDirect(in + 1, in + 1 - stride, out + 1, width - 1);
-    ++row;
+  for (row = 1; row < height; ++row) {
+    out[0] = (uint8_t)(in[0] - in[-stride]);
+    GradientPredictDirect_SSE2(in + 1, in + 1 - stride, out + 1, width - 1);
     in += stride;
     out += stride;
   }
 }
 
-#undef SANITY_CHECK
+#undef DCHECK
 
 //------------------------------------------------------------------------------
 
-static void HorizontalFilter(const uint8_t* data, int width, int height,
-                             int stride, uint8_t* filtered_data) {
-  DoHorizontalFilter(data, width, height, stride, 0, height, filtered_data);
+static void HorizontalFilter_SSE2(const uint8_t* WEBP_RESTRICT data,
+                                  int width, int height, int stride,
+                                  uint8_t* WEBP_RESTRICT filtered_data) {
+  DoHorizontalFilter_SSE2(data, width, height, stride, filtered_data);
 }
 
-static void VerticalFilter(const uint8_t* data, int width, int height,
-                           int stride, uint8_t* filtered_data) {
-  DoVerticalFilter(data, width, height, stride, 0, height, filtered_data);
+static void VerticalFilter_SSE2(const uint8_t* WEBP_RESTRICT data,
+                                int width, int height, int stride,
+                                uint8_t* WEBP_RESTRICT filtered_data) {
+  DoVerticalFilter_SSE2(data, width, height, stride, filtered_data);
 }
 
-static void GradientFilter(const uint8_t* data, int width, int height,
-                           int stride, uint8_t* filtered_data) {
-  DoGradientFilter(data, width, height, stride, 0, height, filtered_data);
+static void GradientFilter_SSE2(const uint8_t* WEBP_RESTRICT data,
+                                int width, int height, int stride,
+                                uint8_t* WEBP_RESTRICT filtered_data) {
+  DoGradientFilter_SSE2(data, width, height, stride, filtered_data);
 }
 
 //------------------------------------------------------------------------------
 // Inverse transforms
 
-static void HorizontalUnfilter(const uint8_t* prev, const uint8_t* in,
-                               uint8_t* out, int width) {
+static void HorizontalUnfilter_SSE2(const uint8_t* prev, const uint8_t* in,
+                                    uint8_t* out, int width) {
   int i;
   __m128i last;
-  out[0] = in[0] + (prev == NULL ? 0 : prev[0]);
+  out[0] = (uint8_t)(in[0] + (prev == NULL ? 0 : prev[0]));
   if (width <= 1) return;
   last = _mm_set_epi32(0, 0, 0, out[0]);
   for (i = 1; i + 8 <= width; i += 8) {
@@ -235,13 +223,13 @@ static void HorizontalUnfilter(const uint8_t* prev, const uint8_t* in,
     _mm_storel_epi64((__m128i*)(out + i), A7);
     last = _mm_srli_epi64(A7, 56);
   }
-  for (; i < width; ++i) out[i] = in[i] + out[i - 1];
+  for (; i < width; ++i) out[i] = (uint8_t)(in[i] + out[i - 1]);
 }
 
-static void VerticalUnfilter(const uint8_t* prev, const uint8_t* in,
-                             uint8_t* out, int width) {
+static void VerticalUnfilter_SSE2(const uint8_t* prev, const uint8_t* in,
+                                  uint8_t* out, int width) {
   if (prev == NULL) {
-    HorizontalUnfilter(NULL, in, out, width);
+    HorizontalUnfilter_SSE2(NULL, in, out, width);
   } else {
     int i;
     const int max_pos = width & ~31;
@@ -256,13 +244,13 @@ static void VerticalUnfilter(const uint8_t* prev, const uint8_t* in,
       _mm_storeu_si128((__m128i*)&out[i +  0], C0);
       _mm_storeu_si128((__m128i*)&out[i + 16], C1);
     }
-    for (; i < width; ++i) out[i] = in[i] + prev[i];
+    for (; i < width; ++i) out[i] = (uint8_t)(in[i] + prev[i]);
   }
 }
 
-static void GradientPredictInverse(const uint8_t* const in,
-                                   const uint8_t* const top,
-                                   uint8_t* const row, int length) {
+static void GradientPredictInverse_SSE2(const uint8_t* const in,
+                                        const uint8_t* const top,
+                                        uint8_t* const row, int length) {
   if (length > 0) {
     int i;
     const int max_pos = length & ~7;
@@ -293,18 +281,19 @@ static void GradientPredictInverse(const uint8_t* const in,
       _mm_storel_epi64((__m128i*)&row[i], out);
     }
     for (; i < length; ++i) {
-      row[i] = in[i] + GradientPredictorC(row[i - 1], top[i], top[i - 1]);
+      const int delta = GradientPredictor_SSE2(row[i - 1], top[i], top[i - 1]);
+      row[i] = (uint8_t)(in[i] + delta);
     }
   }
 }
 
-static void GradientUnfilter(const uint8_t* prev, const uint8_t* in,
-                             uint8_t* out, int width) {
+static void GradientUnfilter_SSE2(const uint8_t* prev, const uint8_t* in,
+                                  uint8_t* out, int width) {
   if (prev == NULL) {
-    HorizontalUnfilter(NULL, in, out, width);
+    HorizontalUnfilter_SSE2(NULL, in, out, width);
   } else {
-    out[0] = in[0] + prev[0];  // predict from above
-    GradientPredictInverse(in + 1, prev + 1, out + 1, width - 1);
+    out[0] = (uint8_t)(in[0] + prev[0]);  // predict from above
+    GradientPredictInverse_SSE2(in + 1, prev + 1, out + 1, width - 1);
   }
 }
 
@@ -314,13 +303,18 @@ static void GradientUnfilter(const uint8_t* prev, const uint8_t* in,
 extern void VP8FiltersInitSSE2(void);
 
 WEBP_TSAN_IGNORE_FUNCTION void VP8FiltersInitSSE2(void) {
-  WebPUnfilters[WEBP_FILTER_HORIZONTAL] = HorizontalUnfilter;
-  WebPUnfilters[WEBP_FILTER_VERTICAL] = VerticalUnfilter;
-  WebPUnfilters[WEBP_FILTER_GRADIENT] = GradientUnfilter;
+  WebPUnfilters[WEBP_FILTER_HORIZONTAL] = HorizontalUnfilter_SSE2;
+#if defined(CHROMIUM)
+  // TODO(crbug.com/654974)
+  (void)VerticalUnfilter_SSE2;
+#else
+  WebPUnfilters[WEBP_FILTER_VERTICAL] = VerticalUnfilter_SSE2;
+#endif
+  WebPUnfilters[WEBP_FILTER_GRADIENT] = GradientUnfilter_SSE2;
 
-  WebPFilters[WEBP_FILTER_HORIZONTAL] = HorizontalFilter;
-  WebPFilters[WEBP_FILTER_VERTICAL] = VerticalFilter;
-  WebPFilters[WEBP_FILTER_GRADIENT] = GradientFilter;
+  WebPFilters[WEBP_FILTER_HORIZONTAL] = HorizontalFilter_SSE2;
+  WebPFilters[WEBP_FILTER_VERTICAL] = VerticalFilter_SSE2;
+  WebPFilters[WEBP_FILTER_GRADIENT] = GradientFilter_SSE2;
 }
 
 #else  // !WEBP_USE_SSE2

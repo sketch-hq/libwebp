@@ -32,6 +32,9 @@
 
 #ifdef SWIGPYTHON
 %module(package="com.google.webp") libwebp
+%begin %{
+#define SWIG_PYTHON_STRICT_BYTE_CHAR
+%}
 #else
 %module libwebp
 #endif  /* SWIGPYTHON */
@@ -151,6 +154,7 @@ int WebPGetEncoderVersion(void);
 %{
 #include "webp/decode.h"
 #include "webp/encode.h"
+#include "webp/types.h"
 %}
 
 #ifdef SWIGJAVA
