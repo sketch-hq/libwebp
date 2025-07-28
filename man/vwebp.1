@@ -1,5 +1,5 @@
 .\"                                      Hey, EMACS: -*- nroff -*-
-.TH VWEBP 1 "June 23, 2016"
+.TH VWEBP 1 "July 18, 2024"
 .SH NAME
 vwebp \- decompress a WebP file and display it in a window
 .SH SYNOPSIS
@@ -38,6 +38,10 @@ It helps by smoothing gradients and avoiding banding artifacts. Default: 50.
 By default, quantized transparency planes are dithered during decompression,
 to smooth the gradients. This flag will prevent this dithering.
 .TP
+.B \-usebgcolor
+Fill transparent areas with the bitstream's own background color instead of
+checkerboard only. Default is white for non-animated images.
+.TP
 .B \-mt
 Use multi-threading for decoding, if possible.
 .TP
@@ -56,18 +60,24 @@ the data will be read from \fIstdin\fP instead of a file.
 .B 'c'
 Toggle use of color profile.
 .TP
+.B 'b'
+Toggle display of background color.
+.TP
 .B 'i'
 Overlay file information.
+.TP
+.B 'd'
+Disable blending and disposal process, for debugging purposes.
 .TP
 .B 'q' / 'Q' / ESC
 Quit.
 
-.SH BUGS
-Please report all bugs to the issue tracker:
-https://bugs.chromium.org/p/webp
-.br
-Patches welcome! See this page to get started:
-http://www.webmproject.org/code/contribute/submitting-patches/
+.SH EXIT STATUS
+If there were no problems during execution, \fBvwebp\fP exits with the value of
+the C constant \fBEXIT_SUCCESS\fP. This is usually zero.
+.PP
+If an error occurs, \fBvwebp\fP exits with the value of the C constant
+\fBEXIT_FAILURE\fP. This is usually one.
 
 .SH EXAMPLES
 vwebp picture.webp
@@ -84,8 +94,15 @@ https://chromium.googlesource.com/webm/libwebp
 .PP
 This manual page was written for the Debian project (and may be used by others).
 
+.SH REPORTING BUGS
+Please report all bugs to the issue tracker:
+https://issues.webmproject.org
+.br
+Patches welcome! See this page to get started:
+https://www.webmproject.org/code/contribute/submitting\-patches/
+
 .SH SEE ALSO
 .BR dwebp (1)
 .br
-Please refer to http://developers.google.com/speed/webp/ for additional
+Please refer to https://developers.google.com/speed/webp/ for additional
 information.

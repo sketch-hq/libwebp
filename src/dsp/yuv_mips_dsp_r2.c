@@ -12,11 +12,11 @@
 // Author(s):  Branimir Vasic (branimir.vasic@imgtec.com)
 //             Djordje Pesut  (djordje.pesut@imgtec.com)
 
-#include "./dsp.h"
+#include "src/dsp/dsp.h"
 
 #if defined(WEBP_USE_MIPS_DSP_R2)
 
-#include "./yuv.h"
+#include "src/dsp/yuv.h"
 
 //------------------------------------------------------------------------------
 // simple point-sampling
@@ -69,9 +69,10 @@
   : "memory", "hi", "lo"                                                       \
 
 #define ROW_FUNC(FUNC_NAME, XSTEP, R, G, B, A)                                 \
-static void FUNC_NAME(const uint8_t* y,                                        \
-                      const uint8_t* u, const uint8_t* v,                      \
-                      uint8_t* dst, int len) {                                 \
+static void FUNC_NAME(const uint8_t* WEBP_RESTRICT y,                          \
+                      const uint8_t* WEBP_RESTRICT u,                          \
+                      const uint8_t* WEBP_RESTRICT v,                          \
+                      uint8_t* WEBP_RESTRICT dst, int len) {                   \
   int i;                                                                       \
   uint32_t temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7;             \
   const int t_con_1 = 26149;                                                   \
@@ -105,10 +106,10 @@ static void FUNC_NAME(const uint8_t* y,                                        \
   }                                                                            \
 }
 
-ROW_FUNC(YuvToRgbRow,      3, 0, 1, 2, 0)
-ROW_FUNC(YuvToRgbaRow,     4, 0, 1, 2, 3)
-ROW_FUNC(YuvToBgrRow,      3, 2, 1, 0, 0)
-ROW_FUNC(YuvToBgraRow,     4, 2, 1, 0, 3)
+ROW_FUNC(YuvToRgbRow_MIPSdspR2,      3, 0, 1, 2, 0)
+ROW_FUNC(YuvToRgbaRow_MIPSdspR2,     4, 0, 1, 2, 3)
+ROW_FUNC(YuvToBgrRow_MIPSdspR2,      3, 2, 1, 0, 0)
+ROW_FUNC(YuvToBgraRow_MIPSdspR2,     4, 2, 1, 0, 3)
 
 #undef ROW_FUNC
 #undef ASM_CLOBBER_LIST
@@ -121,10 +122,10 @@ ROW_FUNC(YuvToBgraRow,     4, 2, 1, 0, 3)
 extern void WebPInitSamplersMIPSdspR2(void);
 
 WEBP_TSAN_IGNORE_FUNCTION void WebPInitSamplersMIPSdspR2(void) {
-  WebPSamplers[MODE_RGB]  = YuvToRgbRow;
-  WebPSamplers[MODE_RGBA] = YuvToRgbaRow;
-  WebPSamplers[MODE_BGR]  = YuvToBgrRow;
-  WebPSamplers[MODE_BGRA] = YuvToBgraRow;
+  WebPSamplers[MODE_RGB]  = YuvToRgbRow_MIPSdspR2;
+  WebPSamplers[MODE_RGBA] = YuvToRgbaRow_MIPSdspR2;
+  WebPSamplers[MODE_BGR]  = YuvToBgrRow_MIPSdspR2;
+  WebPSamplers[MODE_BGRA] = YuvToBgraRow_MIPSdspR2;
 }
 
 #else  // !WEBP_USE_MIPS_DSP_R2

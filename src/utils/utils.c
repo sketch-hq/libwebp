@@ -11,21 +11,24 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include "src/utils/utils.h"
+
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>  // for memcpy()
-#include "../webp/decode.h"
-#include "../webp/encode.h"
-#include "../webp/format_constants.h"  // for MAX_PALETTE_SIZE
-#include "./utils.h"
+
+#include "src/webp/types.h"
+#include "src/utils/palette.h"
+#include "src/webp/encode.h"
 
 // If PRINT_MEM_INFO is defined, extra info (like total memory used, number of
 // alloc/free etc) is printed. For debugging/tuning purpose only (it's slow,
 // and not multi-thread safe!).
 // An interesting alternative is valgrind's 'massif' tool:
-//    http://valgrind.org/docs/manual/ms-manual.html
+//    https://valgrind.org/docs/manual/ms-manual.html
 // Here is an example command line:
 /*    valgrind --tool=massif --massif-out-file=massif.out \
-               --stacks=yes --alloc-fn=WebPSafeAlloc --alloc-fn=WebPSafeCalloc
+               --stacks=yes --alloc-fn=WebPSafeMalloc --alloc-fn=WebPSafeCalloc
       ms_print massif.out
 */
 // In addition:
@@ -59,9 +62,9 @@ static int countdown_to_fail = 0;     // 0 = off
 
 typedef struct MemBlock MemBlock;
 struct MemBlock {
-  void* ptr_;
-  size_t size_;
-  MemBlock* next_;
+  void* ptr;
+  size_t size;
+  MemBlock* next;
 };
 
 static MemBlock* all_blocks = NULL;
@@ -82,7 +85,7 @@ static void PrintMemInfo(void) {
   fprintf(stderr, "high-water mark: %u\n", (uint32_t)high_water_mark);
   while (all_blocks != NULL) {
     MemBlock* b = all_blocks;
-    all_blocks = b->next_;
+    all_blocks = b->next;
     free(b);
   }
 }
@@ -100,6 +103,9 @@ static void Increment(int* const v) {
 #if defined(MALLOC_LIMIT)
     {
       const char* const malloc_limit_str = getenv("MALLOC_LIMIT");
+#if MALLOC_LIMIT > 1
+      mem_limit = (size_t)MALLOC_LIMIT;
+#endif
       if (malloc_limit_str != NULL) {
         mem_limit = atoi(malloc_limit_str);
       }
@@ -117,10 +123,10 @@ static void AddMem(void* ptr, size_t size) {
   if (ptr != NULL) {
     MemBlock* const b = (MemBlock*)malloc(sizeof(*b));
     if (b == NULL) abort();
-    b->next_ = all_blocks;
+    b->next = all_blocks;
     all_blocks = b;
-    b->ptr_ = ptr;
-    b->size_ = size;
+    b->ptr = ptr;
+    b->size = size;
     total_mem += size;
     total_mem_allocated += size;
 #if defined(PRINT_MEM_TRAFFIC)
@@ -139,18 +145,18 @@ static void SubMem(void* ptr) {
   if (ptr != NULL) {
     MemBlock** b = &all_blocks;
     // Inefficient search, but that's just for debugging.
-    while (*b != NULL && (*b)->ptr_ != ptr) b = &(*b)->next_;
+    while (*b != NULL && (*b)->ptr != ptr) b = &(*b)->next;
     if (*b == NULL) {
       fprintf(stderr, "Invalid pointer free! (%p)\n", ptr);
       abort();
     }
     {
       MemBlock* const block = *b;
-      *b = block->next_;
-      total_mem -= block->size_;
+      *b = block->next;
+      total_mem -= block->size;
 #if defined(PRINT_MEM_TRAFFIC)
       fprintf(stderr, "Mem: %u (-%u)\n",
-              (uint32_t)total_mem, (uint32_t)block->size_);
+              (uint32_t)total_mem, (uint32_t)block->size);
 #endif
       free(block);
     }
@@ -168,15 +174,19 @@ static int CheckSizeArgumentsOverflow(uint64_t nmemb, size_t size) {
   const uint64_t total_size = nmemb * size;
   if (nmemb == 0) return 1;
   if ((uint64_t)size > WEBP_MAX_ALLOCABLE_MEMORY / nmemb) return 0;
-  if (total_size != (size_t)total_size) return 0;
+  if (!CheckSizeOverflow(total_size)) return 0;
 #if defined(PRINT_MEM_INFO) && defined(MALLOC_FAIL_AT)
   if (countdown_to_fail > 0 && --countdown_to_fail == 0) {
     return 0;    // fake fail!
   }
 #endif
-#if defined(MALLOC_LIMIT)
-  if (mem_limit > 0 && total_mem + total_size >= mem_limit) {
-    return 0;   // fake fail!
+#if defined(PRINT_MEM_INFO) && defined(MALLOC_LIMIT)
+  if (mem_limit > 0) {
+    const uint64_t new_total_mem = (uint64_t)total_mem + total_size;
+    if (!CheckSizeOverflow(new_total_mem) ||
+        new_total_mem > mem_limit) {
+      return 0;   // fake fail!
+    }
   }
 #endif
 
@@ -188,7 +198,6 @@ void* WebPSafeMalloc(uint64_t nmemb, size_t size) {
   Increment(&num_malloc_calls);
   if (!CheckSizeArgumentsOverflow(nmemb, size)) return NULL;
   assert(nmemb * size > 0);
-  if(nmemb * size <= 0) return NULL; // GRM - Fixed analyser warning
   ptr = malloc((size_t)(nmemb * size));
   AddMem(ptr, (size_t)(nmemb * size));
   return ptr;
@@ -212,9 +221,14 @@ void WebPSafeFree(void* const ptr) {
   free(ptr);
 }
 
-// Public API function.
+// Public API functions.
+
+void* WebPMalloc(size_t size) {
+  return WebPSafeMalloc(1, size);
+}
+
 void WebPFree(void* ptr) {
-  free(ptr);
+  WebPSafeFree(ptr);
 }
 
 //------------------------------------------------------------------------------
@@ -222,7 +236,7 @@ void WebPFree(void* ptr) {
 void WebPCopyPlane(const uint8_t* src, int src_stride,
                    uint8_t* dst, int dst_stride, int width, int height) {
   assert(src != NULL && dst != NULL);
-  assert(src_stride >= width && dst_stride >= width);
+  assert(abs(src_stride) >= width && abs(dst_stride) >= width);
   while (height-- > 0) {
     memcpy(dst, src, width);
     src += src_stride;
@@ -240,67 +254,31 @@ void WebPCopyPixels(const WebPPicture* const src, WebPPicture* const dst) {
 
 //------------------------------------------------------------------------------
 
-#define MAX_COLOR_COUNT         MAX_PALETTE_SIZE
-#define COLOR_HASH_SIZE         (MAX_COLOR_COUNT * 4)
-#define COLOR_HASH_RIGHT_SHIFT  22  // 32 - log2(COLOR_HASH_SIZE).
-
 int WebPGetColorPalette(const WebPPicture* const pic, uint32_t* const palette) {
-  int i;
-  int x, y;
-  int num_colors = 0;
-  uint8_t in_use[COLOR_HASH_SIZE] = { 0 };
-  uint32_t colors[COLOR_HASH_SIZE];
-  static const uint32_t kHashMul = 0x1e35a7bdU;
-  const uint32_t* argb = pic->argb;
-  const int width = pic->width;
-  const int height = pic->height;
-  uint32_t last_pix = ~argb[0];   // so we're sure that last_pix != argb[0]
-  assert(pic != NULL);
-  assert(pic->use_argb);
-
-  for (y = 0; y < height; ++y) {
-    for (x = 0; x < width; ++x) {
-      int key;
-      if (argb[x] == last_pix) {
-        continue;
-      }
-      last_pix = argb[x];
-      key = (kHashMul * last_pix) >> COLOR_HASH_RIGHT_SHIFT;
-      while (1) {
-        if (!in_use[key]) {
-          colors[key] = last_pix;
-          in_use[key] = 1;
-          ++num_colors;
-          if (num_colors > MAX_COLOR_COUNT) {
-            return MAX_COLOR_COUNT + 1;  // Exact count not needed.
-          }
-          break;
-        } else if (colors[key] == last_pix) {
-          break;  // The color is already there.
-        } else {
-          // Some other color sits here, so do linear conflict resolution.
-          ++key;
-          key &= (COLOR_HASH_SIZE - 1);  // Key mask.
-        }
-      }
-    }
-    argb += pic->argb_stride;
-  }
-
-  if (palette != NULL) {  // Fill the colors into palette.
-    num_colors = 0;
-    for (i = 0; i < COLOR_HASH_SIZE; ++i) {
-      if (in_use[i]) {
-        palette[num_colors] = colors[i];
-        ++num_colors;
-      }
-    }
-  }
-  return num_colors;
+  return GetColorPalette(pic, palette);
 }
 
-#undef MAX_COLOR_COUNT
-#undef COLOR_HASH_SIZE
-#undef COLOR_HASH_RIGHT_SHIFT
+//------------------------------------------------------------------------------
+
+#if defined(WEBP_NEED_LOG_TABLE_8BIT)
+const uint8_t WebPLogTable8bit[256] = {   // 31 ^ clz(i)
+  0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3,
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+  5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+  5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
+};
+#endif
 
 //------------------------------------------------------------------------------
