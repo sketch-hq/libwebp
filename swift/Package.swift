@@ -14,6 +14,10 @@ let package = Package(
       targets: ["SharpYuv"]
     ),
     .library(
+      name: "WebPMux",
+      targets: ["WebPMux"]
+    ),
+    .library(
       name: "WebP",
       targets: ["WebP"]
     )
@@ -22,6 +26,10 @@ let package = Package(
     .binaryTarget(
       name: "SharpYuv",
       path: "./SharpYuv.xcframework.zip"
+    ),
+    .binaryTarget(
+      name: "WebPMux",
+      path: "./WebPMux.xcframework.zip"
     ),
     .binaryTarget(
       name: "WebP",
